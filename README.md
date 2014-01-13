@@ -1,6 +1,5 @@
-defsm.hx
+deagent.hx
 ===========
 
-[![Build Status](https://travis-ci.org/DropechoStudios/defsm.hx.png?branch=master)](https://travis-ci.org/DropechoStudios/defsm.hx)
+[![Build Status](https://travis-ci.org/DropechoStudios/deagent.hx.png?branch=master)](https://travis-ci.org/DropechoStudios/deagent.hx)
 
-A Finite State Machine example in haxe.
