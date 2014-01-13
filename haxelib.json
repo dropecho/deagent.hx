@@ -1,0 +1,11 @@
+{
+  "name": "DE-Agent",
+  "url" : "",
+  "license": "MIT",
+  "tags": ["ai", "game"],
+  "description": "This library provides AI utilities for games.",
+  "version": "0.0.1",
+  "releasenote": "Initial release",
+  "contributors": ["Ben Van Treese"],
+  "dependencies": {}
+}

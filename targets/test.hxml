@@ -1,0 +1,6 @@
+--times
+
+-cp de
+-neko bin/tests/deagent.n
+--macro include('de')
+-main de.tests.TestRunner

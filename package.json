@@ -1,0 +1,11 @@
+{
+  "name": "deagent.hx",
+  "description" : "An AI library.",
+  "version": "0.0.1",
+  "devDependencies" : {
+  	"grunt-cli": "*",
+    "grunt" : "*",
+    "grunt-haxe" : "*",
+    "grunt-shell": "*"
+  }
+}

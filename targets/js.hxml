@@ -1,0 +1,6 @@
+--times
+
+-cp de
+-js bin/js/deagent.js
+--macro include('de')
+--macro exclude('de.tests')
