@@ -18,5 +18,5 @@ before_script:
 
 # Run the test!
 script:
-  - grunt
+  - grunt unit_tests
 
