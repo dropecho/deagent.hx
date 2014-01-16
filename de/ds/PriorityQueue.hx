@@ -27,8 +27,13 @@ class PriorityQueue<T>{
 	}
 
 	// Removes the lowest priority item  O(1)
-	public function dequeue():T {
+	public function min():T {
 		var item =  _items.shift();
+		return (item == null) ? null : item.value;
+	}
+
+	public function max():T {
+		var item = _items.pop();
 		return (item == null) ? null : item.value;
 	}
 

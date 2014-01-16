@@ -18,12 +18,12 @@ class FSM<T> {
 		}
 
 		if(CurrentState != null){
-			CurrentState = CurrentState.Execute(Entity, this);
+			CurrentState = CurrentState.Execute(Entity);
 		}		
 	}
 
 	private function CheckBlip() : State<T> {		
-		var blip = GlobalState.Execute(Entity, this);
+		var blip = GlobalState.Execute(Entity);
 
 		if(blip == null && PreviousState != null){
 			trace("return to prev.");

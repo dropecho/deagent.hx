@@ -10,7 +10,7 @@ class State<T> {
         Transitions = transitions != null ? transitions : new Array<T -> State<T>>();
     }
 
-    public function Execute(entity : T, fsm : FSM<T>) : State<T> {
+    public function Execute(entity : T) : State<T> {
 
     	Action(entity);
     	

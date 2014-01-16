@@ -10,7 +10,7 @@ class PQTestObject {
 	}
 }
 
-class PriorityQueueTests extends haxe.unit.TestCase {
+class PriorityQueue_tests extends haxe.unit.TestCase {
     private var queue: PriorityQueue<PQTestObject>;
     private var item1 : PQTestObject;
     private var item2 : PQTestObject;
@@ -42,13 +42,27 @@ class PriorityQueueTests extends haxe.unit.TestCase {
     	assertEquals(1, queue.length);
     }
 
-    public function test_dequeue_returns_min_priority_item(){
+    public function test_min_returns_min_priority_item(){
     	queue.enqueue(item1, item1.Data);
     	queue.enqueue(item2, item2.Data);
 
-    	var min = queue.dequeue();
+    	assertEquals(item1.Data, queue.min().Data);
+    }
 
-    	assertEquals(item1.Data, min.Data);
+    public function test_min_on_empty_queue_should_not_cause_an_error(){    	
+    	assertEquals(null, queue.min());
+    }
+
+    public function test_max_returns_max_priority_item(){
+    	queue.enqueue(item1, item1.Data);
+    	queue.enqueue(item2, item2.Data);
+
+    	assertEquals(item2.Data, queue.max().Data);
+    }
+
+    public function test_max_on_empty_queue_should_not_cause_an_error(){    	
+    	var max = queue.max();
+    	assertEquals(null, max);
     }
 
     public function test_clear_removes_all_from_queue(){
