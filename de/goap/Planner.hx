@@ -1,41 +1,44 @@
 package de.goap;
 
-import de.ds.PriorityQueue;
-
 class Planner {
-	var availableActions : Array<Action>;
-	var goal : State;
+	var _availableActions : Array<Action>;
+	var _goal : State;
 
 	public function new(goal:State, availableActions:Array<Action>) {
-		this.goal = goal;
-		this.availableActions = availableActions;
+		_goal = goal;
+		_availableActions = availableActions;
+        _availableActions.sort(actionSorter);
 	}
 
 	public function generatePlan() : Plan {
-		var preconditions = goal.preconditions;
-		var plan = [];
+		var preconditions = _goal.preconditions;
+		var plan = new Array<Action>();
 
-        while (preconditions.length > 0) {
-            var precondition = preconditions[0];
+        while (preconditions.length > 0) {            
+            var bestMatch = findBestMatch(preconditions.shift());
+                        
+            if(bestMatch == null){ 
+            	return null; // Plan complete or cannot be generated.
+            }           
 
-            var postConditionMatcher = function(condition) { return condition == precondition; };
-            var actionMatcher = function(action) { return action.postconditions.filter(postConditionMatcher).length > 0; };
-            var actionSorter = function(a,b) { return a.cost > b.cost ? 1 : -1; };
-
-            var matches = availableActions.filter(actionMatcher);
-            matches.sort(actionSorter);
-            
-            if(matches.length == 0){
-            	break;
-            }
-
-            var bestChoice = matches[0];
-
-        	preconditions.shift();
-            preconditions = bestChoice.preconditions.concat(preconditions);
-            plan.unshift(bestChoice);            
+            preconditions = bestMatch.Preconditions.concat(preconditions); //Add actions conditions to list of conditions.
+            plan.unshift(bestMatch); //Add match to plan.            
 		}
 
         return new Plan(plan);
 	}
+
+    private function findBestMatch(precondition : String){
+        var postConditionMatcher = function (postcondition : String) : Bool { return postcondition == precondition; };
+        var actionMatcher = function(action : Action) : Bool { return action.Postconditions.filter(postConditionMatcher).length > 0; };
+
+        var matches = _availableActions
+            .filter(actionMatcher);
+
+        return matches.length > 0 ? matches[0] : null;
+    }
+
+    private function actionSorter(a:Action,b:Action) : Int { 
+        return a.Cost > b.Cost ? 1 : -1; 
+    };
 }

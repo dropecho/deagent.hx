@@ -14,7 +14,7 @@ class State_tests extends haxe.unit.TestCase {
     private var state : State<StateTestObject>;
     private var entity : StateTestObject;
 
-    override public function setup() {
+    public override function setup() {
         entity = new StateTestObject();
 
         var action = function(s:StateTestObject){ 

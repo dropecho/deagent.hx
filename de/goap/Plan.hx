@@ -1,34 +1,37 @@
 package de.goap;
 
 class Plan {
-	public var actions : Array<Action>;
-	public var currentAction : Int;
+	public var Actions : Array<Action>;
+	public var CurrentAction : Int;
 
 	public function new(actions : Array<Action> = null){
-		if(actions == null){
-			actions = [];
-		}
-		this.actions = actions;
-		this.currentAction = 0;
+		Actions = actions != null ? actions : [];		
+		CurrentAction = 0;
 	}
 
 	public function update(dT : Float = 0) : Bool{
-		actions[currentAction].update(dT);
+		Actions[CurrentAction].update(dT);
 		return done();
 	}
 
 	public function done() : Bool{
-		if(actions.length <= currentAction + 1){
+		if(NoMoreActionsToExecute()){
 			return true;
 		}
 		
-		if(actions[currentAction].postconditions_satisfied()){
-			currentAction +=1;
-			if(done()){
-				return true;
-			}	
+		if(CurrentActionIsComplete()){
+			++CurrentAction;
+			return done();
 		}
 
 		return false;
 	}
+
+	private function NoMoreActionsToExecute() : Bool{
+		return Actions.length < CurrentAction + 1;
+	}
+
+	private function CurrentActionIsComplete():Bool{
+		return Actions[CurrentAction].postconditions_satisfied();
+	}	
 }
