@@ -1,8 +1,8 @@
 package de.goap;
 
 class Planner {
-	var _availableActions : Array<Action>;
-	var _goal : State;
+	private var _availableActions : Array<Action>;
+	private var _goal : State;
 
 	public function new(goal:State, availableActions:Array<Action>) {
 		_goal = goal;
@@ -11,20 +11,19 @@ class Planner {
 	}
 
 	public function generatePlan() : Plan {
-		var preconditions = _goal.preconditions;
+		var preconditions = _goal.Preconditions;
 		var plan = new Array<Action>();
 
         while (preconditions.length > 0) {            
             var bestMatch = findBestMatch(preconditions.shift());
-                        
+            
             if(bestMatch == null){ 
-            	return null; // Plan complete or cannot be generated.
+                return null; // Plan cannot be generated.
             }           
 
             preconditions = bestMatch.Preconditions.concat(preconditions); //Add actions conditions to list of conditions.
             plan.unshift(bestMatch); //Add match to plan.            
 		}
-
         return new Plan(plan);
 	}
 

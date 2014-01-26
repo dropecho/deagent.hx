@@ -6,12 +6,12 @@ import de.goap.Action;
 import de.goap.State;
 
 class Planner_tests extends haxe.unit.TestCase {
-	var _planner : Planner;
-	var _plan : Plan;
-	var _actionDone : Bool = false;
-	var _action1 : Action;
-	var _action2 : Action;
-	var _goal : State;
+	private var _planner : Planner;
+	private var _plan : Plan;
+	private var _actionDone : Bool = false;
+	private var _action1 : Action;
+	private var _action2 : Action;
+	private var _goal : State;
 
 	public override function setup(){
 		_actionDone = false;
