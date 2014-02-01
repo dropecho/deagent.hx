@@ -1,6 +1,7 @@
 --times
 
--cp de
+-cp src
+-lib polygonal-ds
 -neko bin/tests/deagent.n
---macro include('de')
--main de.tests.TestRunner
+--macro include('com.dropecho')
+-main com.dropecho.ai.tests.TestRunner

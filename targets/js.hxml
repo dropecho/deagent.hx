@@ -1,6 +1,8 @@
 --times
 
--cp de
+-cp src
 -js bin/js/deagent.js
---macro include('de')
---macro exclude('de.tests')
+
+-lib polygonal-ds
+--macro include('com.dropecho')
+--macro exclude('com.dropcho.tests')

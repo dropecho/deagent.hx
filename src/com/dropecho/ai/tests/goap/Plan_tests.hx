@@ -1,7 +1,7 @@
-package de.tests.goap;
+package com.dropecho.ai.tests.goap;
 
-import de.goap.Plan;
-import de.goap.Action;
+import com.dropecho.ai.goap.Plan;
+import com.dropecho.ai.goap.Action;
 
 class Plan_tests extends haxe.unit.TestCase {
 	var _plan : Plan;

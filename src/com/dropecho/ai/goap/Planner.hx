@@ -1,4 +1,4 @@
-package de.goap;
+package com.dropecho.ai.goap;
 
 class Planner {
 	private var _availableActions : Array<Action>;

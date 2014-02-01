@@ -1,6 +1,6 @@
-package de.tests.fsm;
+package com.dropecho.ai.tests.fsm;
 
-import de.fsm.State;
+import com.dropecho.ai.fsm.State;
 
 class StateTestObject {
 	public var Data : Int;

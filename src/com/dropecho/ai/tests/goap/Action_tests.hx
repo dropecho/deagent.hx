@@ -1,6 +1,6 @@
-package de.tests.goap;
+package com.dropecho.ai.tests.goap;
 
-import de.goap.Action;
+import com.dropecho.ai.goap.Action;
 
 class Action_tests extends haxe.unit.TestCase {
     var _action : Action;

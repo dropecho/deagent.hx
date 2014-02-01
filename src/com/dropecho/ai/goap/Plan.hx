@@ -1,4 +1,4 @@
-package de.goap;
+package com.dropecho.ai.goap;
 
 class Plan {
 	public var Actions : Array<Action>;

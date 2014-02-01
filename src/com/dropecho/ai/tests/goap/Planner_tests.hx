@@ -1,9 +1,9 @@
-package de.tests.goap;
+package com.dropecho.ai.tests.goap;
 
-import de.goap.Planner;
-import de.goap.Plan;
-import de.goap.Action;
-import de.goap.State;
+import com.dropecho.ai.goap.Planner;
+import com.dropecho.ai.goap.Plan;
+import com.dropecho.ai.goap.Action;
+import com.dropecho.ai.goap.State;
 
 class Planner_tests extends haxe.unit.TestCase {
 	private var _planner : Planner;

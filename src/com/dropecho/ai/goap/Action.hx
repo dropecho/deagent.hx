@@ -1,4 +1,4 @@
-package de.goap;
+package com.dropecho.ai.goap;
 
 class Action {
 	public var ActionType : String;

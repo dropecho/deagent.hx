@@ -1,4 +1,4 @@
-package de.fsm;
+package com.dropecho.ai.fsm;
 
 class FSM<T> {
 	public var GlobalState : State<T>;
