@@ -15,7 +15,8 @@ before_script:
   - sudo add-apt-repository ppa:eyecreate/haxe -y      	# add the ubuntu ppa that contains haxe
   - sudo apt-get update                                	# pull info from ppa
   - sudo apt-get install haxe -y                       	# install haxe (and neko)
-  - echo y | sudo haxelib setup /usr/lib/haxe/lib		# setup haxelib for dependencies
+  - sudo haxelib setup /usr/lib/haxe/lib				# setup haxelib for dependencies
+  - echo y | haxelib install targets/test.hxml			# install dependencies
 
 # Run the test!
 script:
