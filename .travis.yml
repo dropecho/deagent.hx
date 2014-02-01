@@ -16,7 +16,7 @@ before_script:
   - sudo apt-get update                                	# pull info from ppa
   - sudo apt-get install haxe -y                       	# install haxe (and neko)
   - sudo haxelib setup /usr/lib/haxe/lib				# setup haxelib for dependencies
-  - echo y | haxelib install targets/test.hxml			# install dependencies
+  - y | haxelib install targets/test.hxml				# install dependencies
 
 # Run the test!
 script:
