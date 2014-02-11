@@ -10,7 +10,6 @@ before_script:
   - sudo add-apt-repository ppa:eyecreate/haxe -y      	
   - sudo apt-get update                                	
   - sudo apt-get install haxe -y            
-  - sudo apt-get install yes -y           	
   - sudo haxelib setup /usr/lib/haxe/lib
   - yes | haxelib install targets/test.hxml
 
