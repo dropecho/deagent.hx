@@ -1,12 +1,12 @@
 /*
- *                            _/                                                    _/
- *       _/_/_/      _/_/    _/  _/    _/    _/_/_/    _/_/    _/_/_/      _/_/_/  _/
- *      _/    _/  _/    _/  _/  _/    _/  _/    _/  _/    _/  _/    _/  _/    _/  _/
- *     _/    _/  _/    _/  _/  _/    _/  _/    _/  _/    _/  _/    _/  _/    _/  _/
- *    _/_/_/      _/_/    _/    _/_/_/    _/_/_/    _/_/    _/    _/    _/_/_/  _/
- *   _/                            _/        _/
- *  _/                        _/_/      _/_/
- *
+ *                            _/                                                    _/   
+ *       _/_/_/      _/_/    _/  _/    _/    _/_/_/    _/_/    _/_/_/      _/_/_/  _/    
+ *      _/    _/  _/    _/  _/  _/    _/  _/    _/  _/    _/  _/    _/  _/    _/  _/     
+ *     _/    _/  _/    _/  _/  _/    _/  _/    _/  _/    _/  _/    _/  _/    _/  _/      
+ *    _/_/_/      _/_/    _/    _/_/_/    _/_/_/    _/_/    _/    _/    _/_/_/  _/       
+ *   _/                            _/        _/                                          
+ *  _/                        _/_/      _/_/                                             
+ *                                                                                       
  * POLYGONAL - A HAXE LIBRARY FOR GAME DEVELOPERS
  * Copyright (c) 2009 Michael Baczynski, http://www.polygonal.de
  *
@@ -29,83 +29,67 @@
  */
 package com.dropecho.ai.pathfinding;
 
+import de.polygonal.ds.Graph;
 import de.polygonal.ds.GraphNode;
 import de.polygonal.ds.Heapable;
 
-interface IAStarNode extends Heapable<IAStarNode>
-{	
+class Waypoint<T> extends GraphNode<T> implements Heapable<Waypoint<T>>
+{
+	/**
+	 * Node position on the cartesian plane.
+	 */
+	public var x:Float = 0;
+	public var y:Float = 0;
+	
+	/** Heapable interface */
+	public var position:Int = 0;
+	
 	/**
 	 * The total distance of all the edges that compromise the best path to this node so far.
 	 */
-	var distance:Float;
+	public var distance:Float = 0;
 	
 	/**
 	 * Heuristic estimate of the distance to the target to direct the search towards the target.
 	 */
-	var heuristic:Float;
+	public var heuristic:Float = 0;
 	
 	/**
 	 * True if this waypoint is contained in the queue.
 	 */
-	var onQue:Bool;
-
-	/**
-	 * The graph node that holds this waypoint.
-	 */
-	var node:GraphNode<IAStarNode>;	
-	function reset():Void;	
-	function distanceTo(wp:IAStarNode):Float;
-}
-
-class AStarWaypoint implements IAStarNode
-{
-	public var x:Float;
-	public var y:Float;
-	public var z:Float;
+	public var onQue:Bool = false;
 	
-	/** Heapable interface */
-	public var position:Int;
-	public var distance:Float;
-	public var heuristic:Float;
-	public var onQue:Bool;
-	public var node:GraphNode<IAStarNode>;
-	
-	public function new()
+	public function new(graph:Graph<T>, x:T)
 	{
-		x = 0;
-		y = 0;
-		z = 0;
-		position = -1;
-		distance = Math.NaN;
-		heuristic = Math.NaN;
-		onQue = false;
-		node = null;
+		super(graph, x);
 	}
 	
 	inline public function reset():Void
 	{
-		distance = 0;
+		distance  = 0;
 		heuristic = 0;
-		onQue = false;
+		onQue     = false;
+		marked    = false;
+		parent    = null;
 	}
 	
-	public function distanceTo(node : IAStarNode):Float
+	inline public function distanceTo(other:Waypoint<T>):Float
 	{
-		var wp : Dynamic = node; //Kind of gross, but heeey.
-		var dx = wp.x - x;
-		var dy = wp.y - y;
-		var dz = wp.z - z;
-		return Math.sqrt(dx * dx + dy * dy + dz * dz);
+		var dx = other.x - x;
+		var dy = other.y - y;
+
+
+		return Math.sqrt(dx * dx + dy * dy);
 	}
 	
-	public function compare(other : IAStarNode):Int
+	public function compare(other:Waypoint<T>):Int
 	{
 		var x = other.heuristic - heuristic;
 		return (x > 0.) ? 1 : (x < 0. ? -1 : 0);
 	}
 	
-	public function toString():String
+	override public function toString():String
 	{
-		return "{ AStarWaypoint x: "+x+", y: "+y+" }";
+		return '{ Waypoint id: $val }';
 	}
 }

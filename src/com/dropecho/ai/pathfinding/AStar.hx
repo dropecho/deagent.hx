@@ -1,12 +1,12 @@
 /*
- *                            _/                                                    _/
- *       _/_/_/      _/_/    _/  _/    _/    _/_/_/    _/_/    _/_/_/      _/_/_/  _/
- *      _/    _/  _/    _/  _/  _/    _/  _/    _/  _/    _/  _/    _/  _/    _/  _/
- *     _/    _/  _/    _/  _/  _/    _/  _/    _/  _/    _/  _/    _/  _/    _/  _/
- *    _/_/_/      _/_/    _/    _/_/_/    _/_/_/    _/_/    _/    _/    _/_/_/  _/
- *   _/                            _/        _/
- *  _/                        _/_/      _/_/
- *
+ *                            _/                                                    _/   
+ *       _/_/_/      _/_/    _/  _/    _/    _/_/_/    _/_/    _/_/_/      _/_/_/  _/    
+ *      _/    _/  _/    _/  _/  _/    _/  _/    _/  _/    _/  _/    _/  _/    _/  _/     
+ *     _/    _/  _/    _/  _/  _/    _/  _/    _/  _/    _/  _/    _/  _/    _/  _/      
+ *    _/_/_/      _/_/    _/    _/_/_/    _/_/_/    _/_/    _/    _/    _/_/_/  _/       
+ *   _/                            _/        _/                                          
+ *  _/                        _/_/      _/_/                                             
+ *                                                                                       
  * POLYGONAL - A HAXE LIBRARY FOR GAME DEVELOPERS
  * Copyright (c) 2009 Michael Baczynski, http://www.polygonal.de
  *
@@ -27,6 +27,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
 package com.dropecho.ai.pathfinding;
 
 import de.polygonal.ds.DA;
@@ -34,15 +35,16 @@ import de.polygonal.ds.Graph;
 import de.polygonal.ds.Heap;
 import com.dropecho.ai.pathfinding.AStarWaypoint;
 
-class AStar
+class AStar<T>
 {
-	var _graph:Graph<IAStarNode>;
-	var _que:Heap<IAStarNode>;
+	var _graph:Graph<T>;
 	
-	public function new(graph:Graph<IAStarNode>)
+	var _que:Heap<Waypoint<T>>;
+	
+	public function new(graph:Graph<T>)
 	{
 		_graph = graph;
-		_que = new Heap<IAStarNode>();
+		_que = new Heap<Waypoint<T>>();
 	}
 	
 	public function free():Void
@@ -56,111 +58,78 @@ class AStar
 	
 	/**
 	 * Finds the shortest path from source to target and stores the result in path.
-	 * @return true if a path from source to target exists.
+	 * @return True if a path from source to target exists.
 	 */
-	public function 
-	find(graph : Graph<IAStarNode>, source : IAStarNode, target : IAStarNode) : DA<IAStarNode>
+	public function find(graph:Graph<T>, source:Waypoint<T>, target:Waypoint<T>) : DA<Waypoint<T>>
 	{
-		var path = new DA<IAStarNode>();
+		var path = new DA<Waypoint<T>>();
 		var pathExists = false;
 		
-		//reset search
 		var walker = graph.getNodeList();
 		while (walker != null)
 		{
-			//reset node & waypoint
-			walker.marked = false;
-			walker.parent = null;
-			walker.val.reset();
+			cast(walker, Waypoint<Dynamic>).reset();
 			walker = walker.next;
 		}
 		
-		//shortcut to _que
-		var q = _que;
+		_que.clear();		
+		_que.add(source);
 		
-		//reset queue
-		q.clear();
-		
-		//enqueue starting node
-		q.add(source);
-		
-		//while there are waypoints in the queue...
-		while (q.size() > 0)
+		while (_que.size() > 0)
 		{
-			//grab the next waypoint off the queue and process it
-			var waypoint1 = q.pop();
-			waypoint1.onQue = false;
+			var node1 = _que.pop();
+			node1.onQue = false;
 			
-			//each waypoint holds a reference to its GraphNode
-			var node1 = waypoint1.node;
-			
-			//make sure the waypoint wasn't visited before (can be visited multiple times)
 			if (node1.marked) continue;
 			
-			//mark node as processed
 			node1.marked = true;
 			
-			//exit if the target node has been found
-			if (node1 == target.node)
+			if (node1 == target)
 			{
 				pathExists = true;
 				break;
 			}
 			
-			//visit all connected nodes (denoted as waypoint2, node2)
 			var arc = node1.arcList;
 			while (arc != null)
 			{
-				//the node our arc is pointing at
-				var node2 = arc.node;
+				var node2:Waypoint<T> = cast arc.node;
 				
-				//skip marked nodes
 				if (node2.marked)
 				{
 					arc = arc.next;
 					continue;
 				}
 				
-				var waypoint2 = node2.val;
+				var distance = node1.distance + node1.distanceTo(node2) * arc.cost;
 				
-				//compute accumulated distance to get from the current waypoint (1) to the next waypoint (2)
-				var distance = waypoint1.distance + waypoint1.distanceTo(waypoint2) * arc.cost;
-				
-				//node has been processed before ?
 				if (node2.parent != null)
 				{
-					//distance has been calculated before so check if new distance is shorter
-					if (distance < waypoint2.distance)
+					if (distance < node2.distance)
 					{
-						//switch to shorter path ("edge relaxation")
 						node2.parent = node1;
-						waypoint2.distance = distance;
+						node2.distance = distance;
 					}
 					else
 					{
-						//new distance > existing distance, skip
 						arc = arc.next;
 						continue;
 					}
 				}
 				else
 				{
-					//first time of being added to the queue - setup parent and distance
 					node2.parent = node1;
-					waypoint2.distance = distance;
+					node2.distance = distance;
 				}
 				
-				//compute A* heuristics
-				var heuristics = waypoint2.distanceTo(target) + distance;
+				var heuristics = node2.distanceTo(target) + distance;
 				
-				//waypoints closest to the source node are processed first
-				waypoint2.heuristic = heuristics;
+				node2.heuristic = heuristics;
 				
-				//add to the search frontier
-				if (!waypoint2.onQue)
+				if (!node2.onQue)
 				{
-					waypoint2.onQue = true;
-					q.add(waypoint2);
+					node2.onQue = true;
+					_que.add(node2);
 				}
 				
 				arc = arc.next;
@@ -169,21 +138,17 @@ class AStar
 		
 		if (pathExists)
 		{
-			//trace the path by working back through the parents
-			//from the target node to the source node
 			var walker = target;
 			while (walker != source)
 			{
 				path.pushBack(walker);
-				walker = walker.node.parent.val;
+				walker = cast walker.parent;
 			}
 			
 			path.pushBack(source);
 			path.reverse();
-			return path;
 		}
 		
-		path.clear();		
 		return path;
 	}
 }

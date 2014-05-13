@@ -7,27 +7,19 @@ import com.dropecho.ai.pathfinding.AStar;
 import com.dropecho.ai.pathfinding.AStarWaypoint;
 
 class AStar_tests extends haxe.unit.TestCase {
-	public var _path : DA<IAStarNode>;
-	public var _graph : Graph<IAStarNode>;
-	public var _source : IAStarNode;
-	public var _target : IAStarNode;
+	public var _path : DA<Waypoint<Int>>;
+	public var _graph : Graph<Int>;
+	public var _source : Waypoint<Int>;
+	public var _target : Waypoint<Int>;
 
 	public override function setup(){
-		_graph = new Graph<IAStarNode>();
-		_source = new AStarWaypoint();
-		_target = new AStarWaypoint();
-		
-		_path = null;
+		_graph = new Graph<Int>();
+		_source = new Waypoint<Int>(_graph, 1);
+		_target = new Waypoint<Int>(_graph, 1);
 	}
 
 	public function test_in_two_node_graph_path_should_be_generated_with_length_2(){
-		var source_node = _graph.createNode(_source);
-		var target_node = _graph.createNode(_target);
-
-		_source.node = source_node;
-		_target.node = target_node;
-
-		_source.node.addArc(_target.node);
+		_source.addArc(_target);
 
 		var finder = new AStar(_graph);
 		_path = finder.find(_graph, _source, _target);
@@ -35,14 +27,10 @@ class AStar_tests extends haxe.unit.TestCase {
 	}
 
 	public function test_in_three_node_graph_path_should_be_generated_with_length_3(){
-		var between : IAStarNode = new AStarWaypoint();
+		var between = new Waypoint<Int>(_graph, 1);
 
-		_source.node = _graph.createNode(_source);
-		between.node = _graph.createNode(between);
-		_target.node = _graph.createNode(_target);
-
-		_source.node.addArc(between.node);
-		between.node.addArc(_target.node);
+		 _source.addArc(between);
+		 between.addArc(_target);
 
 		var finder = new AStar(_graph);
 		_path = finder.find(_graph, _source, _target);
@@ -50,17 +38,12 @@ class AStar_tests extends haxe.unit.TestCase {
 	}
 
 	public function test_in_four_node_graph_with_one_side_node_path_should_be_generated_with_length_3(){
-		var between : IAStarNode = new AStarWaypoint();
-		var bad_path: IAStarNode  = new AStarWaypoint();
+		var between  = new Waypoint<Int>(_graph, 100);
+		var bad_path  = new Waypoint<Int>(_graph, 200);
 
-		_source.node = _graph.createNode(_source);
-		between.node = _graph.createNode(between);
-		bad_path.node = _graph.createNode(bad_path);
-		_target.node = _graph.createNode(_target);
-
-		_source.node.addArc(between.node);
-		_source.node.addArc(bad_path.node);
-		between.node.addArc(_target.node);
+		_source.addArc(between);
+		_source.addArc(bad_path);
+		between.addArc(_target);
 
 		var finder = new AStar(_graph);
 		_path = finder.find(_graph, _source, _target);

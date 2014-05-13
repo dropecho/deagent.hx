@@ -4,5 +4,7 @@
 -js bin/js/deagent.js
 
 -lib polygonal-ds
---macro include('com.dropecho')
---macro exclude('com.dropcho.tests')
+--macro include('com.dropecho.ai.fsm')
+--macro include('com.dropecho.ai.goap')
+--macro include('com.dropecho.ai.pathfinding')
+
