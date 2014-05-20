@@ -12,6 +12,3 @@ before_script:
   - sudo apt-get install haxe -y            
   - sudo haxelib setup /usr/lib/haxe/lib
   - haxelib install polygonal-ds
-
-script:
-  - grunt unit_tests

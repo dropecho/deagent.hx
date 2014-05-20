@@ -3,9 +3,9 @@
   "description" : "An AI library.",
   "version": "0.0.1",
   "devDependencies" : {
-  	"grunt-cli": "*",
-    "grunt" : "*",
-    "grunt-haxe" : "*",
-    "grunt-shell": "*"
+  },
+  "scripts" :{
+  	"build" : "haxe targets/js.hxml",
+	"test" : "haxe targets/test.hxml && neko bin/tests/tests.n"
   }
 }

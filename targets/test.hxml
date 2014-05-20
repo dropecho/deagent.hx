@@ -2,6 +2,6 @@
 
 -cp src
 -lib polygonal-ds
--neko bin/tests/deagent.n
+-neko bin/tests/tests.n
 --macro include('com.dropecho')
 -main com.dropecho.ai.tests.TestRunner
