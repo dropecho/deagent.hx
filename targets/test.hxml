@@ -1,5 +1,8 @@
 --times
 
+-cmd mkdir -p bin/tests
+--next
+
 -cp src
 -lib polygonal-ds
 -neko bin/tests/tests.n
