@@ -1,6 +1,6 @@
 --times
 
--cmd mkdir -p bin/tests
+-cmd (rm -rf bin && mkdir bin && mkdir bin\tests)
 --next
 
 -cp src
