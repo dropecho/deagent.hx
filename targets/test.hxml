@@ -1,8 +1,5 @@
 --times
 
--cmd (rm -rf bin && mkdir bin && mkdir bin\tests)
---next
-
 -cp src
 -lib polygonal-ds
 -neko bin/tests/tests.n
