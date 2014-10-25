@@ -1,7 +1,10 @@
 --times
 
 -cp src
+-cp test
 -lib polygonal-ds
--neko bin/tests/tests.n
+-lib munit
+-lib hamcrest
+-neko bin/test/tests.n
 --macro include('com.dropecho')
--main com.dropecho.ai.tests.TestRunner
+-main TestMain

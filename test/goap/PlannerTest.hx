@@ -1,11 +1,12 @@
-package com.dropecho.ai.tests.goap;
+package goap;
 
+import massive.munit.Assert;
 import com.dropecho.ai.goap.Planner;
 import com.dropecho.ai.goap.Plan;
 import com.dropecho.ai.goap.Action;
 import com.dropecho.ai.goap.State;
 
-class Planner_tests extends haxe.unit.TestCase {
+class PlannerTest {
 	private var _planner : Planner;
 	private var _plan : Plan;
 	private var _actionDone : Bool = false;
@@ -13,7 +14,8 @@ class Planner_tests extends haxe.unit.TestCase {
 	private var _action2 : Action;
 	private var _goal : State;
 
-	public override function setup(){
+	@Before
+	public function setup(){
 		_actionDone = false;
 		_action1 = new Action("test_action",function(deltaTime){ _actionDone = true; }, 1);
 		_action2 = new Action("test_action2",function(deltaTime){ _actionDone = true; }, 0);
@@ -21,26 +23,29 @@ class Planner_tests extends haxe.unit.TestCase {
 		_goal = new State(["test_condition"]);		
 	}
 
+	@Test
 	public function test_when_given_no_matching_actions_plan_should_be_null(){
 		_planner = new Planner(_goal, [_action1]);
 		_plan = _planner.generatePlan();
-		assertTrue(_plan == null);
+		Assert.isTrue(_plan == null);
 	}
 
+	@Test
 	public function test_when_given_a_matching_action_plan_should_be_generated(){
 		_action1.Postconditions = ["test_condition"];
 		_planner = new Planner(_goal, [_action1]);
 		_plan = _planner.generatePlan();
 
-		assertTrue(_plan != null);
+		Assert.isTrue(_plan != null);
 	}
 
+	@Test
 	public function test_when_given_two_matching_actions_plan_should_contain_lowest_cost_action(){		
 		_action1.Postconditions = ["test_condition"];
 		_action2.Postconditions = ["test_condition"];
 		_planner = new Planner(_goal, [_action1, _action2]);
 		_plan = _planner.generatePlan();
 
-		assertEquals(_plan.Actions[0], _action2);	
+		Assert.areEqual(_plan.Actions[0], _action2);	
 	}
 }

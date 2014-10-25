@@ -3,9 +3,12 @@
   "description" : "An AI library.",
   "version": "0.0.1",
   "devDependencies" : {
+	  "gulp" : "*",
+	  "gulp-shell":"*",
+	  "mkdirp":"*"
   },
   "scripts" :{
-  	"build" : "./build_support/build.sh",
-	"test" : "./build_support/test.sh"
+  	"build" : "gulp build",
+	"test" : "gulp test"
   }
 }

@@ -1,5 +1,5 @@
+report
 bin
-bin/**
+*.swp
+.temp
 node_modules
-node_modules/**
-.sublime-grunt.cache

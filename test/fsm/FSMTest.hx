@@ -1,4 +1,4 @@
-package com.dropecho.ai.tests.fsm;
+package fsm;
 
 import com.dropecho.ai.fsm.FSM;
 
@@ -10,8 +10,5 @@ class FSMTestObject {
 	}
 }
 
-class FSM_tests extends haxe.unit.TestCase {
-
-    override public function setup() {
-    }
+class FSMTest {
 }

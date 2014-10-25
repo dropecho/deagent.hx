@@ -1,5 +1,6 @@
-package com.dropecho.ai.tests.fsm;
+package fsm;
 
+import massive.munit.Assert;
 import com.dropecho.ai.fsm.State;
 
 class StateTestObject {
@@ -10,11 +11,12 @@ class StateTestObject {
 	}
 }
 
-class State_tests extends haxe.unit.TestCase {
+class StateTest {
     private var state : State<StateTestObject>;
     private var entity : StateTestObject;
 
-    public override function setup() {
+	@Before
+    public function setup() {
         entity = new StateTestObject();
 
         var action = function(s:StateTestObject){ 
@@ -28,26 +30,30 @@ class State_tests extends haxe.unit.TestCase {
         state = new State(action, [transition]);
     }
 
+	@Test
     public function test_can_create_state() {
-        assertTrue(state != null);
+        Assert.isTrue(state != null);
     }
 
+	@Test
     public function test_execute_should_call_action(){
     	state.Execute(entity);
 
-    	assertEquals(1, entity.Data);
+    	Assert.areEqual(1, entity.Data);
     }
 
+	@Test
     public function test_execute_should_return_this_on_failed_transition(){
     	var switchState = state.Execute(entity);
 
-    	assertEquals(state, switchState);
+    	Assert.areEqual(state, switchState);
     }
 
+	@Test
     public function test_execute_should_return_new_state_on_transition(){
     	state.Execute(entity);
     	var switchState = state.Execute(entity);
 
-    	assertTrue(switchState != null && switchState != state);
+    	Assert.isTrue(switchState != null && switchState != state);
     }
 }

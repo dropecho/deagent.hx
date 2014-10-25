@@ -11,6 +11,4 @@ before_script:
   - sudo apt-get update                                	
   - sudo apt-get install haxe -y            
   - sudo haxelib setup /usr/lib/haxe/lib
-  - sudo haxelib install polygonal-ds
-  - sudo mkdir bin
-  - sudo mkdir bin/tests
+  - sudo haxelib install munit

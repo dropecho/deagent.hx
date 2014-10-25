@@ -1,13 +1,15 @@
-package com.dropecho.ai.tests.goap;
+package goap;
 
+import massive.munit.Assert;
 import com.dropecho.ai.goap.Action;
 
-class Action_tests extends haxe.unit.TestCase {
+class ActionTest {
     var _action : Action;
 
     var _counter : Int = 0;
 
-    public override function setup(){    	
+	@Before
+    public function setup(){    	
     	_counter = 0;
     	
     	_action = new Action("test_action", function(deltaTime){ ++_counter;});
@@ -15,18 +17,21 @@ class Action_tests extends haxe.unit.TestCase {
     	_action.PostMatcher = function(){ ++_counter; return false; }
     }
 
+	@Test
     public function test_update_should_call_given_func(){
     	_action.update(0);
-    	assertEquals(_counter, 1);
+    	Assert.areEqual(_counter, 1);
     }
 
+	@Test
 	public function test_pre_conditions_satisfied_should_call_given_func(){
     	_action.preconditions_satisfied();
-    	assertEquals(_counter, 1);	
+    	Assert.areEqual(_counter, 1);	
     }
 
+	@Test
     public function test_post_conditions_satisfied_should_call_given_func(){
     	_action.postconditions_satisfied();
-    	assertEquals(_counter, 1);
+    	Assert.areEqual(_counter, 1);
     }
 }
