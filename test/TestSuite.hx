@@ -1,5 +1,6 @@
 import massive.munit.TestSuite;
 
+import ExampleTest;
 import fsm.FSMTest;
 import fsm.StateTest;
 import goap.ActionTest;
@@ -19,6 +20,7 @@ class TestSuite extends massive.munit.TestSuite
 	{
 		super();
 
+		add(ExampleTest);
 		add(fsm.FSMTest);
 		add(fsm.StateTest);
 		add(goap.ActionTest);

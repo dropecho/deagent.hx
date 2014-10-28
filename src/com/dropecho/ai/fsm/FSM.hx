@@ -6,15 +6,15 @@ class FSM<T> {
 	public var PreviousState : State<T>;
 	public var Entity : T;
 
-	public function new(entity : T, startingState : State<T>, ?globalState : State<T>){
+	public function new(entity : T, startingState : State<T>, ?globalState : State<T> = null){
 		Entity = entity;
 		CurrentState = startingState;
 		GlobalState = globalState;
 	}
 
-	public function Run(){
+	public function run(){
 		if(GlobalState != null){			
-			CurrentState = CheckBlip();			
+			CurrentState = checkBlip();			
 		}
 
 		if(CurrentState != null){
@@ -22,7 +22,7 @@ class FSM<T> {
 		}		
 	}
 
-	private function CheckBlip() : State<T> {		
+	private function checkBlip() : State<T> {		
 		var blip = GlobalState.Execute(Entity);
 
 		if(blip == null && PreviousState != null){

@@ -10,9 +10,9 @@ gulp.on('err', function errHandler(err) {
 
 process.on('exit', function(err) {
     process.nextTick(function() {
-		if(!watching){		
-        	process.exit(err.code);
-		}
+        if (!watching) {
+            process.exit(err.code);
+        }
     });
 });
 
@@ -30,9 +30,13 @@ gulp.task('test', function() {
         .pipe(shell('haxelib run munit test -result-exit-code'));
 });
 
-gulp.task('test-coverage', shell.task('haxelib run munit test -coverage'));
+gulp.task('test-coverage', function() {
+    return gulp
+        .src('')
+        .pipe(shell('haxelib run munit test -coverage'));
+});
 
 gulp.task('watch', function() {
-	watching = true;
+    watching = true;
     gulp.watch(['src/**/*.hx', 'test/**/*.hx', 'targets/**'], ['test']);
 });

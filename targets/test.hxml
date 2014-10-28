@@ -6,5 +6,4 @@
 -lib munit
 -lib hamcrest
 -neko bin/test/tests.n
---macro include('com.dropecho')
 -main TestMain
