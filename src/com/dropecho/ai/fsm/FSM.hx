@@ -1,5 +1,6 @@
 package com.dropecho.ai.fsm;
 
+@:expose("de.fsm.FSM")
 class FSM<T> {
 	public var GlobalState : State<T>;
 	public var CurrentState : State<T>;
@@ -13,24 +14,24 @@ class FSM<T> {
 	}
 
 	public function run(){
-		if(GlobalState != null){			
-			CurrentState = checkBlip();			
+		if(GlobalState != null){
+			CurrentState = checkBlip();
 		}
 
 		if(CurrentState != null){
 			CurrentState = CurrentState.Execute(Entity);
-		}		
+		}
 	}
 
-	private function checkBlip() : State<T> {		
+	private function checkBlip() : State<T> {
 		var blip = GlobalState.Execute(Entity);
 
 		if(blip == null && PreviousState != null){
 			trace("return to prev.");
-			return PreviousState;				
+			return PreviousState;
 		}
 
-		if(blip != null && blip != GlobalState){			
+		if(blip != null && blip != GlobalState){
 			PreviousState = CurrentState;
 			return blip;
 		}

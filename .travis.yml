@@ -1,15 +1,14 @@
 language: node_js
-cache: 
+cache:
   apt: true
   directories:
     - node_modules
 
 before_script:
   - sudo apt-get update
-  - sudo apt-get install python-software-properties -y 	
-  - sudo add-apt-repository ppa:eyecreate/haxe -y      	
-  - sudo apt-get update                                	
-  - sudo apt-get install haxe -y            
-  - sudo haxelib setup /usr/lib/haxe/lib
+  - sudo apt-get install python-software-properties -y
+  - sudo add-apt-repository ppa:eyecreate/haxe -y
+  - sudo apt-get update
+  - sudo apt-get install haxe -y
   - sudo haxelib install munit
   - sudo haxelib install polygonal-ds
