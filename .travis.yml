@@ -3,6 +3,7 @@ cache:
   apt: true
   directories:
     - node_modules
+    - $HOME/haxe/lib
 
 sudo: false
 
@@ -14,4 +15,5 @@ addons:
 before_script:
   - mkdir -p $HOME/haxe/lib
   - haxelib setup $HOME/haxe/lib
-  - haxelib install targets/test.hxml --always
+  - haxelib install munit --always
+  - haxelib install polygonal-ds --always
