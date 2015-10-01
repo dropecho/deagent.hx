@@ -15,5 +15,5 @@ addons:
 before_script:
   - mkdir -p $HOME/haxe/lib
   - haxelib setup $HOME/haxe/lib
-  - haxelib install munit --always
-  - haxelib install polygonal-ds --always
+  - haxelib install munit
+  - haxelib install polygonal-ds
