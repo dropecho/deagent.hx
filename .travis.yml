@@ -4,11 +4,13 @@ cache:
   directories:
     - node_modules
 
+sudo: false
+
+addons:
+    apt:
+        packages:
+            haxe
+
 before_script:
-  - sudo apt-get update
-  - sudo apt-get install python-software-properties -y
-  - sudo add-apt-repository ppa:eyecreate/haxe -y
-  - sudo apt-get update
-  - sudo apt-get install haxe -y
-  - sudo haxelib setup /usr/lib/haxe/lib
-  - sudo haxelib install targets/test.hxml --always
+  - haxelib setup /usr/lib/haxe/lib
+  - haxelib install targets/test.hxml --always
