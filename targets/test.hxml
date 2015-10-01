@@ -2,7 +2,6 @@
 
 -cp src
 -cp test
--lib polygonal-ds
 -lib munit
 -lib hamcrest
 -neko bin/test/tests.n
