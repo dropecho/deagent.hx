@@ -7,7 +7,6 @@ import bt.node.decorator.InverterNodeTest;
 import bt.node.decorator.RepeaterNodeTest;
 import bt.node.decorator.RepeatUntilNodeTest;
 import bt.node.decorator.SucceederNodeTest;
-import ExampleTest;
 import fsm.FSMTest;
 import fsm.StateTest;
 import goap.ActionTest;
@@ -34,7 +33,6 @@ class TestSuite extends massive.munit.TestSuite
 		add(bt.node.decorator.RepeaterNodeTest);
 		add(bt.node.decorator.RepeatUntilNodeTest);
 		add(bt.node.decorator.SucceederNodeTest);
-		add(ExampleTest);
 		add(fsm.FSMTest);
 		add(fsm.StateTest);
 		add(goap.ActionTest);
