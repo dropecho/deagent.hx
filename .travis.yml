@@ -12,4 +12,4 @@ hxml:
     - targets/js.hxml
 
 script:
-    - munit test
+    - haxelib run munit test
