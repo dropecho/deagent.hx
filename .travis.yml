@@ -1,4 +1,4 @@
-language: node_js
+language: haxe
 cache:
   apt: true
   directories:
@@ -7,13 +7,9 @@ cache:
 
 sudo: false
 
-addons:
-    apt:
-        packages:
-            haxe
+hxml:
+    - targets/test.hxml
+    - targets/js.hxml
 
-before_script:
-  - mkdir -p $HOME/haxe/lib
-  - haxelib setup $HOME/haxe/lib
-  - haxelib install munit
-  - haxelib install polygonal-ds
+script:
+    - gulp test
