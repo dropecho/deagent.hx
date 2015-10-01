@@ -12,5 +12,6 @@ addons:
             haxe
 
 before_script:
-  - haxelib setup /usr/lib/haxe/lib
+  - mkdir -p $HOME/haxe/lib
+  - haxelib setup $HOME/haxe/lib
   - haxelib install targets/test.hxml --always
