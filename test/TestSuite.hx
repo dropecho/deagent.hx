@@ -13,7 +13,6 @@ import fsm.StateTest;
 import goap.ActionTest;
 import goap.PlannerTest;
 import goap.PlanTest;
-import pathfinding.AStarTest;
 import util.CurrentIteratorTest;
 
 /**
@@ -41,7 +40,6 @@ class TestSuite extends massive.munit.TestSuite
 		add(goap.ActionTest);
 		add(goap.PlannerTest);
 		add(goap.PlanTest);
-		add(pathfinding.AStarTest);
 		add(util.CurrentIteratorTest);
 	}
 }
