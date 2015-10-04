@@ -12,7 +12,8 @@ class SequenceNode extends CompositeNode {
 	public override function execute() : NODE_STATUS {
 		var status = this.childIterator.current().execute();
 
-		if(this.childIterator.hasNext() && (status == NODE_STATUS.SUCCESS || status == NODE_STATUS.RUNNING)){
+		var hasNext = this.childIterator.hasNext() ;
+		if(hasNext == true && (status == NODE_STATUS.SUCCESS || status == NODE_STATUS.RUNNING)){
 			this.childIterator.next();
 			return NODE_STATUS.RUNNING;
 		} else {

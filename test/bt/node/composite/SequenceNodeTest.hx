@@ -41,17 +41,29 @@ class SequenceNodeTest {
 		var tn2 = new TestNode();
 		children.unshift(tn2);
 
-		//execute, and fail first.
 		this.node.execute();
-
-		//because the first fails, the sequence fails, so we should never call the test node
 		this.node.execute();
 
 		Assert.areEqual(1, tn2.executed);
 		Assert.areEqual(1, testNode.executed);
 	}
 
+	@Test public function when_execute_is_called_and_the_end_of_the_list_of_children_is_reached_it_should_reset_the_child_list(){
+		var tn2 = new TestNode();
+		children.unshift(tn2);
 
+		this.node.execute();
+		this.node.execute();
+
+		this.node.execute();
+		this.node.execute();
+
+		this.node.execute();
+		this.node.execute();
+
+		Assert.areEqual(3, tn2.executed);
+		Assert.areEqual(3, testNode.executed);
+	}
 
 	@Test public function tree_should_init_root_node_with_context(){
 		Assert.isNotNull(testNode.context);

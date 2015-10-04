@@ -3,14 +3,14 @@
 var testNode1 = {
     execute: function(){
         console.log('node 1');
-        return ['SUCCESS', 1];
+        return 0;
     }
 };
 
 var testNode2 = {
     execute: function(){
         console.log('node 2');
-        return ['SUCCESS', 1];
+        return 0;
     }
 };
 
