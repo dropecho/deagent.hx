@@ -1,4 +1,6 @@
-interface LeafNode extends Node(){
-	public function init() : Boolean {}
-	public function execute() : Boolean{}
-}
+package com.dropecho.ai.bt.node;
+
+//class LeafNode implements Node {
+	////public function init() : Bool {};
+	////public function execute() : Bool {};
+//}

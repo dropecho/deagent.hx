@@ -38,5 +38,5 @@ gulp.task('test-coverage', function() {
 
 gulp.task('watch', function() {
     watching = true;
-    gulp.watch(['src/**/*.hx', 'test/**/*.hx', 'targets/**'], ['test']);
+    gulp.watch(['src/**/*.hx', 'test/**/*.hx', 'targets/**'], ['test-coverage']);
 });

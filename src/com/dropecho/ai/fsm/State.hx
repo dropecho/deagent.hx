@@ -1,6 +1,7 @@
 package com.dropecho.ai.fsm;
 
-class State<T> {    
+@:expose("de.fsm.State")
+class State<T> {
 	public var Action : T -> Void;
 	public var Transitions : Array<T -> State<T>>;
 
@@ -13,13 +14,13 @@ class State<T> {
     public function Execute(entity : T) : State<T> {
 
     	Action(entity);
-    	
+
     	for (transition in Transitions) {
     		var switchState = transition(entity);
             if(switchState != null){
                 return switchState;
             }
-    	}    	
+    	}
         return this;
     }
 }

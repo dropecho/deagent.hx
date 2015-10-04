@@ -1,13 +1,14 @@
-package com.dropecho.ai.bt.node;
+package com.dropecho.ai.bt.node.decorator;
 
+@:expose("de.bt.RepeaterNode")
 class RepeaterNode extends DecoratorNode {
+
 	public function new(child : Node){
 		super(child);
 	}
 
-	public function execute() : Boolean {
-		while(true){
-			child.execute();
-		}
+	public override function execute() : NODE_STATUS {
+		child.execute();
+		return NODE_STATUS.RUNNING;
 	}
 }

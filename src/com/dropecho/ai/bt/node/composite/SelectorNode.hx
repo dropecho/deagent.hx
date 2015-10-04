@@ -1,15 +1,32 @@
-package com.dropecho.ai.bt.node;
-using lambda;
+package com.dropecho.ai.bt.node.composite;
+using Lambda;
 
+import com.dropecho.ai.bt.node.Node;
+
+@:expose("de.bt.SelectorNode")
 class SelectorNode extends CompositeNode {
 	public function new(children : Array<Node>){
 		super(children);
 	}
 
-	public function execute() : Boolean {
-		return _children.exists(function(child){
-			return child.execute();
-		});
+	public override function execute() : NODE_STATUS {
+		var status = this.childIterator.current().execute();
+
+		if(status == NODE_STATUS.SUCCESS) {
+			this.childIterator.reset();
+			return NODE_STATUS.SUCCESS;
+		}
+
+		if(status == NODE_STATUS.FAILURE) {
+			if(!this.childIterator.hasNext()){
+				this.childIterator.reset();
+				return NODE_STATUS.FAILURE;
+			}
+
+			this.childIterator.next();
+		}
+
+		return NODE_STATUS.RUNNING;
 	}
 }
 
