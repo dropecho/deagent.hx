@@ -24,7 +24,7 @@ class SequenceNodeTest {
 		this.node.init(new Context());
 	}
 
-	@Test public function when_execute_is_called_it_should_execute_the_children(){
+	@Test public function when_execute_is_called_and_the_first_node_fails_it_should_not_call_the_second_node(){
 
 		children.unshift(new TestNode(NODE_STATUS.FAILURE));
 
