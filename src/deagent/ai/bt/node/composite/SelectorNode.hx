@@ -1,7 +1,7 @@
-package com.dropecho.ai.bt.node.composite;
+package deagent.ai.bt.node.composite;
 using Lambda;
 
-import com.dropecho.ai.bt.node.Node;
+import deagent.ai.bt.node.Node;
 
 @:expose("de.bt.SelectorNode")
 class SelectorNode extends CompositeNode {

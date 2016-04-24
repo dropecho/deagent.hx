@@ -1,7 +1,7 @@
-package com.dropecho.ai.bt.node;
+package deagent.ai.bt.node;
 
-import com.dropecho.ai.bt.Context;
-import com.dropecho.ai.bt.node.NODE_STATUS;
+import deagent.ai.bt.Context;
+import deagent.ai.bt.node.NODE_STATUS;
 
 interface Node {
 	public function init(context : Context) : Void;

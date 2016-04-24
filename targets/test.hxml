@@ -1,8 +1,6 @@
---times
-
 -cp src
 -cp test
 -lib munit
 -lib hamcrest
--neko bin/test/tests.n
 -main TestMain
+-neko bin/test/tests.n

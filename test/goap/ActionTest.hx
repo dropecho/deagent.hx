@@ -1,7 +1,7 @@
 package goap;
 
 import massive.munit.Assert;
-import com.dropecho.ai.goap.Action;
+import deagent.ai.goap.Action;
 
 class ActionTest {
     var _action : Action;

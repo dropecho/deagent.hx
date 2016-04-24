@@ -1,7 +1,7 @@
 package util;
 
 import massive.munit.Assert;
-import com.dropecho.util.CurrentIterator;
+import deagent.util.CurrentIterator;
 
 class CurrentIteratorTest {
 	private var array : Array<Int>;

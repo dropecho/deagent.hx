@@ -1,4 +1,4 @@
-package com.dropecho.ai.bt.node.decorator;
+package deagent.ai.bt.node.decorator;
 
 @:expose("de.bt.RepeaterNode")
 class RepeaterNode extends DecoratorNode {

@@ -3,12 +3,12 @@ package bt.node.decorator;
 
 import massive.munit.Assert;
 
-import com.dropecho.ai.bt.node.Node;
-import com.dropecho.ai.bt.node.NODE_STATUS;
-import com.dropecho.ai.bt.Context;
+import deagent.ai.bt.node.Node;
+import deagent.ai.bt.node.NODE_STATUS;
+import deagent.ai.bt.Context;
 import bt.node.TestNode;
 
-import com.dropecho.ai.bt.node.decorator.RepeatUntilNode;
+import deagent.ai.bt.node.decorator.RepeatUntilNode;
 
 class RepeatUntilNodeTest {
 

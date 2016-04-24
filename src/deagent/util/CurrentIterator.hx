@@ -1,4 +1,4 @@
-package com.dropecho.util;
+package deagent.util;
 
 class CurrentIterator<T> {
 	private var array : Array<T>;

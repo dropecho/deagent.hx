@@ -1,8 +1,8 @@
 package goap;
 
 import massive.munit.Assert;
-import com.dropecho.ai.goap.Plan;
-import com.dropecho.ai.goap.Action;
+import deagent.ai.goap.Plan;
+import deagent.ai.goap.Action;
 
 class PlanTest {
 	var _plan : Plan;

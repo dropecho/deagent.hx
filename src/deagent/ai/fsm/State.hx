@@ -1,4 +1,4 @@
-package com.dropecho.ai.fsm;
+package deagent.ai.fsm;
 
 @:expose("de.fsm.State")
 class State<T> {

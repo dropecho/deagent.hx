@@ -1,4 +1,4 @@
-package com.dropecho.ai.bt;
+package deagent.ai.bt;
 
 
 @:expose("de.bt.Context")

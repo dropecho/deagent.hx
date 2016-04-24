@@ -1,18 +1,18 @@
 import massive.munit.TestSuite;
 
-import bt.BehaviorTreeTest;
-import bt.node.composite.SelectorNodeTest;
-import bt.node.composite.SequenceNodeTest;
+import bt.node.decorator.SucceederNodeTest;
+import bt.node.decorator.RepeatUntilNodeTest;
 import bt.node.decorator.InverterNodeTest;
 import bt.node.decorator.RepeaterNodeTest;
-import bt.node.decorator.RepeatUntilNodeTest;
-import bt.node.decorator.SucceederNodeTest;
-import fsm.FSMTest;
-import fsm.StateTest;
+import bt.node.composite.SelectorNodeTest;
+import bt.node.composite.SequenceNodeTest;
+import bt.BehaviorTreeTest;
 import goap.ActionTest;
 import goap.PlannerTest;
 import goap.PlanTest;
 import util.CurrentIteratorTest;
+import fsm.FSMTest;
+import fsm.StateTest;
 
 /**
  * Auto generated Test Suite for MassiveUnit.
@@ -26,18 +26,18 @@ class TestSuite extends massive.munit.TestSuite
 	{
 		super();
 
-		add(bt.BehaviorTreeTest);
-		add(bt.node.composite.SelectorNodeTest);
-		add(bt.node.composite.SequenceNodeTest);
+		add(bt.node.decorator.SucceederNodeTest);
+		add(bt.node.decorator.RepeatUntilNodeTest);
 		add(bt.node.decorator.InverterNodeTest);
 		add(bt.node.decorator.RepeaterNodeTest);
-		add(bt.node.decorator.RepeatUntilNodeTest);
-		add(bt.node.decorator.SucceederNodeTest);
-		add(fsm.FSMTest);
-		add(fsm.StateTest);
+		add(bt.node.composite.SelectorNodeTest);
+		add(bt.node.composite.SequenceNodeTest);
+		add(bt.BehaviorTreeTest);
 		add(goap.ActionTest);
 		add(goap.PlannerTest);
 		add(goap.PlanTest);
 		add(util.CurrentIteratorTest);
+		add(fsm.FSMTest);
+		add(fsm.StateTest);
 	}
 }

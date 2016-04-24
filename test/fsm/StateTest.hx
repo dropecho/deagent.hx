@@ -1,7 +1,7 @@
 package fsm;
 
 import massive.munit.Assert;
-import com.dropecho.ai.fsm.State;
+import deagent.ai.fsm.State;
 
 class StateTestObject {
 	public var Data : Int;

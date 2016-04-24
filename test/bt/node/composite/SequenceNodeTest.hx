@@ -3,11 +3,11 @@ package bt.node.composite;
 
 import massive.munit.Assert;
 
-import com.dropecho.ai.bt.node.Node;
-import com.dropecho.ai.bt.node.NODE_STATUS;
-import com.dropecho.ai.bt.Context;
+import deagent.ai.bt.node.Node;
+import deagent.ai.bt.node.NODE_STATUS;
+import deagent.ai.bt.Context;
 
-import com.dropecho.ai.bt.node.composite.SequenceNode;
+import deagent.ai.bt.node.composite.SequenceNode;
 
 class SequenceNodeTest {
 	private var testNode : TestNode;

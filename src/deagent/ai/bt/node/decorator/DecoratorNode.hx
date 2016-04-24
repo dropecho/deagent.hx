@@ -1,4 +1,4 @@
-package com.dropecho.ai.bt.node.decorator;
+package deagent.ai.bt.node.decorator;
 
 class DecoratorNode implements Node {
 	private var child : Node;

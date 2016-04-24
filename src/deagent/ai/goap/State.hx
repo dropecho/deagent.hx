@@ -1,4 +1,4 @@
-package com.dropecho.ai.goap;
+package deagent.ai.goap;
 
 class State {
 	public var Relevance : Int;

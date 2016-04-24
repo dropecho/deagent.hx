@@ -1,6 +1,6 @@
-package com.dropecho.ai.bt;
+package deagent.ai.bt;
 
-import com.dropecho.ai.bt.node.Node;
+import deagent.ai.bt.node.Node;
 
 @:expose("de.bt.BehaviorTree")
 class BehaviorTree implements Node {

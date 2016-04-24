@@ -1,6 +1,6 @@
 package fsm;
 
-import com.dropecho.ai.fsm.*;
+import deagent.ai.fsm.*;
 import massive.munit.Assert;
 
 class FSMTestObject {

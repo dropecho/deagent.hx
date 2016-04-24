@@ -1,7 +1,7 @@
-package com.dropecho.ai.bt.node.composite;
+package deagent.ai.bt.node.composite;
 using Lambda;
 
-import com.dropecho.util.CurrentIterator;
+import deagent.util.CurrentIterator;
 
 class CompositeNode implements Node {
 	private var children : Array<Node>;

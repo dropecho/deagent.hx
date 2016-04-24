@@ -1,8 +1,8 @@
 package bt.node;
 
-import com.dropecho.ai.bt.node.Node;
-import com.dropecho.ai.bt.node.NODE_STATUS;
-import com.dropecho.ai.bt.Context;
+import deagent.ai.bt.node.Node;
+import deagent.ai.bt.node.NODE_STATUS;
+import deagent.ai.bt.Context;
 
 class TestNode implements Node {
 	public var executed : Int = 0;
