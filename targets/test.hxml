@@ -2,5 +2,6 @@
 -cp test
 -lib munit
 -lib hamcrest
+-lib polygonal-ds
 -main TestMain
 -neko bin/test/tests.n
