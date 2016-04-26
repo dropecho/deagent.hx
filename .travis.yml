@@ -12,5 +12,5 @@ hxml:
     - targets/js.hxml
 
 script:
-    - haxelib git polygonal-ds git@github.com:polygonal/ds.git dev
+    - haxelib git polygonal-ds https://github.com/polygonal/ds.git dev 
     - haxelib run munit test -result-exit-code
