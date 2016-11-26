@@ -12,16 +12,11 @@ class SequenceNode extends CompositeNode {
 	public override function execute() : NODE_STATUS {
 		var status = this.childIterator.current().execute();
 
-		if(NODE_STATUS.SUCCESS == status){
-			if(this.childIterator.hasNext()){
-				this.childIterator.next();
-				return NODE_STATUS.RUNNING;
-			}
-
-			return NODE_STATUS.SUCCESS;
-		}
-
-		if(NODE_STATUS.FAILURE == status){
+		var hasNext = this.childIterator.hasNext() ;
+		if(hasNext == true && (status == NODE_STATUS.SUCCESS || status == NODE_STATUS.RUNNING)){
+			this.childIterator.next();
+			return NODE_STATUS.RUNNING;
+		} else {
 			this.childIterator.reset();
 		}
 

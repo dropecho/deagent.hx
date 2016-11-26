@@ -14,7 +14,7 @@ class CurrentIterator<T> {
 	}
 
 	public function hasNext() : Bool {
-		return i < array.length;
+		return i < array.length - 1;
 	}
 
 	public function current() : T {
