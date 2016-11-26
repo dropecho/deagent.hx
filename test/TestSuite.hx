@@ -11,7 +11,6 @@ import goap.ActionTest;
 import goap.PlannerTest;
 import goap.PlanTest;
 import util.CurrentIteratorTest;
-import pathfinding.AStarTest;
 import fsm.FSMTest;
 import fsm.StateTest;
 
@@ -38,7 +37,6 @@ class TestSuite extends massive.munit.TestSuite
 		add(goap.PlannerTest);
 		add(goap.PlanTest);
 		add(util.CurrentIteratorTest);
-		add(pathfinding.AStarTest);
 		add(fsm.FSMTest);
 		add(fsm.StateTest);
 	}

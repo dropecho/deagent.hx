@@ -5,7 +5,7 @@ class Plan {
 	public var CurrentAction : Int;
 
 	public function new(actions : Array<Action> = null){
-		Actions = actions != null ? actions : [];		
+		Actions = actions != null ? actions : [];
 		CurrentAction = 0;
 	}
 
@@ -18,7 +18,7 @@ class Plan {
 		if(NoMoreActionsToExecute()){
 			return true;
 		}
-		
+
 		if(CurrentActionIsComplete()){
 			++CurrentAction;
 			return done();
@@ -33,5 +33,5 @@ class Plan {
 
 	private function CurrentActionIsComplete():Bool{
 		return Actions[CurrentAction].postconditions_satisfied();
-	}	
+	}
 }

@@ -14,30 +14,34 @@ class Planner {
 		var preconditions = _goal.Preconditions;
 		var plan = new Array<Action>();
 
-        while (preconditions.length > 0) {            
-            var bestMatch = findBestMatch(preconditions.shift());
-            
-            if(bestMatch == null){ 
-                return null; // Plan cannot be generated.
-            }           
+    while (preconditions.length > 0) {
+      var bestMatch = findBestMatch(preconditions.shift());
+      if(bestMatch == null){
+          return null; // Plan cannot be generated.
+      }
 
-            preconditions = bestMatch.Preconditions.concat(preconditions); //Add actions conditions to list of conditions.
-            plan.unshift(bestMatch); //Add match to plan.            
+      preconditions = bestMatch.Preconditions.concat(preconditions); //Add actions conditions to list of conditions.
+      plan.unshift(bestMatch); //Add match to plan.            
 		}
-        return new Plan(plan);
-	}
+    return new Plan(plan);
+  }
 
-    private function findBestMatch(precondition : String){
-        var postConditionMatcher = function (postcondition : String) : Bool { return postcondition == precondition; };
-        var actionMatcher = function(action : Action) : Bool { return action.Postconditions.filter(postConditionMatcher).length > 0; };
-
-        var matches = _availableActions
-            .filter(actionMatcher);
-
-        return matches.length > 0 ? matches[0] : null;
-    }
-
-    private function actionSorter(a:Action,b:Action) : Int { 
-        return a.Cost > b.Cost ? 1 : -1; 
+  private function findBestMatch(precondition : String){
+    var postConditionMatcher = function (postcondition : String) : Bool {
+      return postcondition == precondition;
     };
+
+    var actionMatcher = function(action : Action) : Bool {
+      return action.Postconditions.filter(postConditionMatcher).length > 0;
+    };
+
+    var matches = _availableActions
+        .filter(actionMatcher);
+
+    return matches.length > 0 ? matches[0] : null;
+  }
+
+  private function actionSorter(a:Action,b:Action) : Int {
+    return a.Cost > b.Cost ? 1 : -1;
+  };
 }
