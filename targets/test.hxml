@@ -3,7 +3,8 @@
 
 -lib munit
 -lib hamcrest
--lib polygonal-ds
+# -lib polygonal-ds
+-lib tjson
 
 -main TestMain
 -neko bin/test/tests.n

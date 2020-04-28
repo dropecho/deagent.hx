@@ -14,7 +14,7 @@ var testNode2 = {
   }
 };
 
-var seqNode = new de.bt.SequenceNode([testNode1, testNode2]);
+var seqNode = new bt.SequenceNode([testNode1, testNode2]);
 
-var rootNode = new de.bt.RepeaterNode(seqNode);
-var exampleBT = new de.bt.BehaviorTree(rootNode);
+var rootNode = new bt.RepeaterNode(seqNode);
+var exampleBT = new bt.BehaviorTree(rootNode);

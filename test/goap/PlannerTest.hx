@@ -1,10 +1,10 @@
 package goap;
 
 import massive.munit.Assert;
-import deagent.ai.goap.Planner;
-import deagent.ai.goap.Plan;
-import deagent.ai.goap.Action;
-import deagent.ai.goap.State;
+import dropecho.ai.goap.Planner;
+import dropecho.ai.goap.Plan;
+import dropecho.ai.goap.Action;
+import dropecho.ai.goap.State;
 
 class PlannerTest {
 	private var _planner : Planner;

@@ -1,31 +1,31 @@
-package bt.node.decorator;
+package bt.nodecorator;
 
 import massive.munit.Assert;
 
-import deagent.ai.bt.node.Node;
-import deagent.ai.bt.node.NODE_STATUS;
-import deagent.ai.bt.Context;
-import bt.node.TestNode;
+import dropecho.ai.bt.noNode;
+import dropecho.ai.bt.noNODE_STATUS;
+import dropecho.ai.Blackboard;
+import bt.noTestNode;
 
-import deagent.ai.bt.node.decorator.RepeaterNode;
+import dropecho.ai.bt.nodecorator.RepeaterNode;
 
 class RepeaterNodeTest {
 
 	@Test public function when_execute_is_called_and_the_child_node_is_failing_it_should_return_running(){
 		var node = new RepeaterNode(new TestNode(NODE_STATUS.FAILURE));
-		var status = node.execute();
+		var status = noexecute();
 		Assert.areEqual(NODE_STATUS.RUNNING, status);
 	}
 
 	@Test public function when_execute_is_called_and_the_child_node_is_successful_it_should_return_running(){
 		var node = new RepeaterNode(new TestNode(NODE_STATUS.SUCCESS));
-		var status = node.execute();
+		var status = noexecute();
 		Assert.areEqual(NODE_STATUS.RUNNING, status);
 	}
 
 	@Test public function when_execute_is_called_and_the_child_node_is_running_it_should_return_running(){
 		var node = new RepeaterNode(new TestNode(NODE_STATUS.RUNNING));
-		var status = node.execute();
+		var status = noexecute();
 		Assert.areEqual(NODE_STATUS.RUNNING, status);
 	}
 

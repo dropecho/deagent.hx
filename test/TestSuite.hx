@@ -1,11 +1,12 @@
 import massive.munit.TestSuite;
 
-import bt.node.decorator.SucceederNodeTest;
-import bt.node.decorator.RepeatUntilNodeTest;
-import bt.node.decorator.InverterNodeTest;
-import bt.node.decorator.RepeaterNodeTest;
-import bt.node.composite.SelectorNodeTest;
-import bt.node.composite.SequenceNodeTest;
+import ai.BlackboardTest;
+import bt.nodecorator.SucceederNodeTest;
+import bt.nodecorator.RepeatUntilNodeTest;
+import bt.nodecorator.InverterNodeTest;
+import bt.nodecorator.RepeaterNodeTest;
+import bt.nocomposite.SelectorNodeTest;
+import bt.nocomposite.SequenceNodeTest;
 import bt.BehaviorTreeTest;
 import goap.ActionTest;
 import goap.PlannerTest;
@@ -18,20 +19,19 @@ import fsm.StateTest;
  * Auto generated Test Suite for MassiveUnit.
  * Refer to munit command line tool for more information (haxelib run munit)
  */
-
 class TestSuite extends massive.munit.TestSuite
-{		
-
+{
 	public function new()
 	{
 		super();
 
-		add(bt.node.decorator.SucceederNodeTest);
-		add(bt.node.decorator.RepeatUntilNodeTest);
-		add(bt.node.decorator.InverterNodeTest);
-		add(bt.node.decorator.RepeaterNodeTest);
-		add(bt.node.composite.SelectorNodeTest);
-		add(bt.node.composite.SequenceNodeTest);
+		add(ai.BlackboardTest);
+		add(bt.nodecorator.SucceederNodeTest);
+		add(bt.nodecorator.RepeatUntilNodeTest);
+		add(bt.nodecorator.InverterNodeTest);
+		add(bt.nodecorator.RepeaterNodeTest);
+		add(bt.nocomposite.SelectorNodeTest);
+		add(bt.nocomposite.SequenceNodeTest);
 		add(bt.BehaviorTreeTest);
 		add(goap.ActionTest);
 		add(goap.PlannerTest);
