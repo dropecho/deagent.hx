@@ -2,11 +2,11 @@ package bt;
 
 import massive.munit.Assert;
 
-import dropecho.ai.bt.noNode;
-import dropecho.ai.bt.noNODE_STATUS;
+import dropecho.ai.bt.node.Node;
+import dropecho.ai.bt.node.NODE_STATUS;
 import dropecho.ai.bt.BehaviorTree;
 import dropecho.ai.Blackboard;
-import bt.noTestNode;
+import bt.node.TestNode;
 
 class BehaviorTreeTest {
 	private var testNode : TestNode;
@@ -21,10 +21,10 @@ class BehaviorTreeTest {
 	@Test public function when_execute_is_called_on_the_tree_it_should_execute_the_root_node(){
 		this.tree.execute();
 
-		Assert.areEqual(1, testNoexecuted);
+		Assert.areEqual(1, testNode.executed);
 	}
 
 	@Test public function tree_should_init_root_node_with_context(){
-		Assert.isNotNull(testNocontext);
+		Assert.isNotNull(testNode.context);
 	}
 }

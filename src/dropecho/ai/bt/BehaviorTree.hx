@@ -1,6 +1,6 @@
 package dropecho.ai.bt;
 
-import dropecho.ai.bt.noNode;
+import dropecho.ai.bt.node.Node;
 
 @:expose("bt.BehaviorTree")
 class BehaviorTree implements Node {

@@ -1,4 +1,4 @@
-package dropecho.ai.bt.nodecorator;
+package dropecho.ai.bt.node.decorator;
 
 class DecoratorNode implements Node {
 	private var child : Node;

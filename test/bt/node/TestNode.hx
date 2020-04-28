@@ -1,7 +1,7 @@
 package bt.node;
 
-import dropecho.ai.bt.noNode;
-import dropecho.ai.bt.noNODE_STATUS;
+import dropecho.ai.bt.node.Node;
+import dropecho.ai.bt.node.NODE_STATUS;
 import dropecho.ai.Blackboard;
 
 class TestNode implements Node {

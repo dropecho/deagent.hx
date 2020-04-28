@@ -1,32 +1,31 @@
-
-package bt.nodecorator;
+package bt.node.decorator;
 
 import massive.munit.Assert;
 
-import dropecho.ai.bt.noNode;
-import dropecho.ai.bt.noNODE_STATUS;
+import dropecho.ai.bt.node.Node;
+import dropecho.ai.bt.node.NODE_STATUS;
 import dropecho.ai.Blackboard;
-import bt.noTestNode;
+import bt.node.TestNode;
 
-import dropecho.ai.bt.nodecorator.RepeatUntilNode;
+import dropecho.ai.bt.node.decorator.RepeatUntilNode;
 
 class RepeatUntilNodeTest {
 
 	@Test public function when_execute_is_called_and_the_child_node_is_failing_it_should_return_running(){
 		var node = new RepeatUntilNode(new TestNode(NODE_STATUS.FAILURE));
-		var status = noexecute();
+		var status = node.execute();
 		Assert.areEqual(NODE_STATUS.SUCCESS, status);
 	}
 
 	@Test public function when_execute_is_called_and_the_child_node_is_successful_it_should_return_running(){
 		var node = new RepeatUntilNode(new TestNode(NODE_STATUS.SUCCESS));
-		var status = noexecute();
+		var status = node.execute();
 		Assert.areEqual(NODE_STATUS.RUNNING, status);
 	}
 
 	@Test public function when_execute_is_called_and_the_child_node_is_running_it_should_return_running(){
 		var node = new RepeatUntilNode(new TestNode(NODE_STATUS.RUNNING));
-		var status = noexecute();
+		var status = node.execute();
 		Assert.areEqual(NODE_STATUS.RUNNING, status);
 	}
 

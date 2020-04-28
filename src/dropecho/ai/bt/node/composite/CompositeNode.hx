@@ -1,4 +1,4 @@
-package dropecho.ai.bt.nocomposite;
+package dropecho.ai.bt.node.composite;
 using Lambda;
 
 import dropecho.util.CurrentIterator;

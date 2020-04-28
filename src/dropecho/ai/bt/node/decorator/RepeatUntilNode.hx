@@ -1,4 +1,4 @@
-package dropecho.ai.bt.nodecorator;
+package dropecho.ai.bt.node.decorator;
 
 @:expose("bt.RepeatUntilNode")
 class RepeatUntilNode extends DecoratorNode {

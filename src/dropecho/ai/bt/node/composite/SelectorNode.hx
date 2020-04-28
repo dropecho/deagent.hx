@@ -1,7 +1,7 @@
-package dropecho.ai.bt.nocomposite;
+package dropecho.ai.bt.node.composite;
 using Lambda;
 
-import dropecho.ai.bt.noNode;
+import dropecho.ai.bt.node.Node;
 
 @:expose("bt.SelectorNode")
 class SelectorNode extends CompositeNode {
