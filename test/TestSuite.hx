@@ -13,7 +13,6 @@ import goap.PlannerTest;
 import goap.PlanTest;
 import util.CurrentIteratorTest;
 import fsm.FSMTest;
-import fsm.StateTest;
 
 /**
  * Auto generated Test Suite for MassiveUnit.
@@ -38,6 +37,5 @@ class TestSuite extends massive.munit.TestSuite
 		add(goap.PlanTest);
 		add(util.CurrentIteratorTest);
 		add(fsm.FSMTest);
-		add(fsm.StateTest);
 	}
 }

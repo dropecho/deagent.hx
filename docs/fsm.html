@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <style>
+      #container {
+        display: flex;
+        flex-direction: row;
+      }
+      #blackboard {
+        table-layout: auto;
+      }
+      #blackboard table,
+      #blackboard th,
+      #blackboard td {
+        border-spacing: 0px;
+        border-collapse: collapse;
+        border: thin solid black;
+        padding: 5px;
+        padding-right: 20px;
+        margin: 0;
+      }
+      .edge,
+      .edge *,
+      .node {
+        transition: stroke 0.3s;
+        stroke: black;
+      }
+      .edge.active,
+      .edge.active *,
+      .node.active {
+        stroke: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="d3"></div>
+      <div id="blackboard"></div>
+    </div>
+  </body>
+  <script
+    src="https://unpkg.com/@hpcc-js/wasm/dist/index.min.js"
+    type="javascript/worker"
+  ></script>
+  <script src="http://unpkg.com/d3"></script>
+  <script src="http://unpkg.com/d3-graphviz"></script>
+  <script src="dropecho.ai.js"></script>
+  <script src="fsm.js"></script>
+  <html></html>
+</html>

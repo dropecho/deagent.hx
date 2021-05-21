@@ -1,6 +1,14 @@
---times
+-lib dropecho.ds
+-lib dropecho.interop
 
 -cp src
--js bin/js/dropecho.js
 
 --macro include('',true, null, ['src'])
+
+--each
+
+--next
+targets/js.hxml
+
+--next
+# targets/cs.hxml

@@ -4,90 +4,80 @@ import dropecho.ai.fsm.*;
 import dropecho.ai.Blackboard;
 import massive.munit.Assert;
 
-class GlobalTestState extends State<Blackboard> {}
+class BlackboardState {
+	private var bb:Blackboard;
 
-class TestState1 extends State<Blackboard> {
-	public function new() {
-		super(function(ent:Blackboard) {
-			ent.increment("data");
-		});
+	public function new(bb:Blackboard) {
+		this.bb = bb;
 	}
 }
 
-class TestState2 extends State<Blackboard> {
-	public function new() {
-		super(function(ent:Blackboard) {
-			ent.set("state_2_ran", 1);
-		});
+class TestState1 extends BlackboardState implements IState {
+	public function getName():String {
+		return "TestState1";
+	}
+
+	public function onEnter() {}
+
+	public function onExit() {}
+
+	public function tick() {
+		bb.increment('some_fact');
+	}
+}
+
+class TestState2 extends BlackboardState implements IState {
+	public function getName():String {
+		return "TestState2";
+	}
+
+	public function onEnter() {}
+
+	public function onExit() {}
+
+	public function tick() {
+		bb.decrement('some_fact');
 	}
 }
 
 class FSMTest {
 	private var bb:Blackboard;
 	private var st1:TestState1;
+	private var st2:TestState2;
 	private var fsm:FSM<Blackboard>;
 
 	@Before
 	public function setup() {
 		bb = new Blackboard();
-		st1 = new TestState1();
-		this.fsm = new FSM(bb, st1);
+		bb.set('some_fact', 0);
+		st1 = new TestState1(bb);
+		st2 = new TestState2(bb);
+
+		this.fsm = new FSM();
+
+		fsm.addTransition(st1, st2, () -> bb.get('some_fact') > 2);
+		this.fsm.changeToState(st1);
 	}
 
 	@Test
 	public function starting_state_runs() {
-		fsm.run();
-		Assert.areEqual(1, bb.get("data"));
-		fsm.run();
-		Assert.areEqual(2, bb.get("data"));
+		fsm.tick();
+		Assert.areEqual(1, bb.get("some_fact"));
+		fsm.tick();
+		Assert.areEqual(2, bb.get("some_fact"));
 	}
 
 	@Test
-	public function starting_state_transitions() {
-		var st2 = new TestState2();
-
-		st1.transitions.push(bb -> {
-			if (bb.get("data") >= 2) {
-				return st2;
-			}
-
-			return null;
-		});
-
-		st2.transitions.push(bb -> {
-			if (bb.get("state_2_ran") > 0) {
-				return st1;
-			}
-
-			return null;
-		});
-
-    //in state 1
-		fsm.run();
-		Assert.areEqual(1, bb.get("data"));
-
-    // in state 1
-		fsm.run();
-		Assert.areEqual(2, bb.get("data"));
-
-    // transitioned to state 2, set ran = 1
-		fsm.run();
-		Assert.areEqual(1, bb.get("state_2_ran"));
-		Assert.areEqual(2, bb.get("data"));
-
-    // back to st1, increment data 
-		fsm.run();
-		Assert.areEqual(1, bb.get("state_2_ran"));
-		Assert.areEqual(3, bb.get("data"));
-
-    //back to st2, set ran = 1
-		fsm.run();
-		Assert.areEqual(1, bb.get("state_2_ran"));
-		Assert.areEqual(3, bb.get("data"));
-
-    // back to st1, increment data
-		fsm.run();
-		Assert.areEqual(1, bb.get("state_2_ran"));
-		Assert.areEqual(4, bb.get("data"));
+	public function transitions_work() {
+		fsm.tick();
+		Assert.areEqual(1, bb.get("some_fact"));
+		fsm.tick();
+		Assert.areEqual(2, bb.get("some_fact"));
+		fsm.tick();
+		Assert.areEqual(3, bb.get("some_fact"));
+		fsm.tick();
+		Assert.areEqual(2, bb.get("some_fact"));
+		fsm.tick();
+		Assert.areEqual(1, bb.get("some_fact"));
 	}
 }

@@ -1,0 +1,39 @@
+# --next
+# -cp src
+# -cp test
+#
+# -lib dropecho.ds
+# -lib dropecho.interop
+#
+# -lib munit
+# -lib hamcrest
+#
+# -main TestMain
+# -neko artifacts/neko_test/tests.n
+
+# --next
+# -cp src
+# -cp test
+#
+# -lib dropecho.ds
+# -lib dropecho.interop
+#
+# -lib munit
+# -lib hamcrest
+#
+# -main TestMain
+# -cs artifacts/cs_test
+
+# --next
+-cp src
+-cp test
+
+-lib dropecho.ds
+-lib dropecho.interop
+
+-lib munit
+-lib hamcrest
+-lib hxnodejs
+
+-main TestMain
+-js artifacts/js_test/test.js

@@ -1,27 +1,26 @@
 package dropecho.ai;
 
-import haxe.ds.StringMap;
+import dropecho.interop.AbstractMap;
 
 @:expose("Blackboard")
 class Blackboard {
-	private var facts:StringMap<Dynamic> = new StringMap<Dynamic>();
+	public var facts = new AbstractMap<String, Int>();
 
 	public function new() {}
 
-	public function get(key:String) {
-		return this.facts.get(key);
+	public function get(key:String):Int {
+		return facts.exists(key) ? facts.get(key) : 0;
 	}
 
-	public function set(key:String, value:Dynamic) {
-		return this.facts.set(key, value);
+	public function set(key:String, value:Int):Int {
+		return facts.set(key, value);
 	}
 
-	public function increment(key:String) {
-		var val = 0;
-		if (this.facts.exists(key)) {
-			val = this.facts.get(key);
-		}
-		val++;
-		this.facts.set(key, val);
+	public function increment(key:String):Int {
+		return facts.set(key, facts.get(key) + 1);
+	}
+
+	public function decrement(key:String):Int {
+		return facts.set(key, facts.get(key) - 1);
 	}
 }

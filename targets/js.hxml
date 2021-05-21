@@ -1,7 +1,3 @@
---times
-
--cp src
--js bin/js/deagent.js
-
--lib polygonal-ds
---macro include('',true, null, ['src'])
+-D js-es=6
+# -D analyzer-optimize
+-js dist/js/dropecho.ai.js 

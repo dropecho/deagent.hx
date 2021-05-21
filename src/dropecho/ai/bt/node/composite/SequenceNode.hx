@@ -2,29 +2,28 @@ package dropecho.ai.bt.node.composite;
 
 using Lambda;
 
-
 @:expose("bt.SequenceNode")
 class SequenceNode extends CompositeNode {
-	public function new(children : Array<Node>){
+	public function new(children:Array<Node>) {
 		super(children);
 	}
 
-	public override function execute() : NODE_STATUS {
-		var status = this.childIterator.current().execute();
+	public override function execute():NODE_STATUS {
+		var childStatus = this.childIterator.current().execute();
 
-		var hasNext = this.childIterator.hasNext() ;
-		if(hasNext == true && (status == NODE_STATUS.SUCCESS || status == NODE_STATUS.RUNNING)){
-      if(status == NODE_STATUS.RUNNING){
-			  return NODE_STATUS.RUNNING;
-      }
-			this.childIterator.next();
+		if (childStatus == NODE_STATUS.RUNNING) {
 			return NODE_STATUS.RUNNING;
-		} else {
-			this.childIterator.reset();
 		}
 
-		return status;
+		var childFailed = (childStatus == NODE_STATUS.FAILURE);
+		var allChildrenSucceeded = this.childIterator.hasNext() == false && childStatus == NODE_STATUS.SUCCESS;
+
+		if (childFailed || allChildrenSucceeded) {
+			this.childIterator.reset();
+			return childStatus;
+		}
+
+		this.childIterator.next();
+		return NODE_STATUS.RUNNING;
 	}
 }
-
-

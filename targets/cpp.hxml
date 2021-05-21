@@ -1,8 +1,8 @@
 --times
 
 -cp src
--cpp bin/cpp
+-cpp dist/cpp
 -D mingw
--lib polygonal-ds
+
 --macro include('com.dropecho')
 --macro exclude('com.dropcho.tests')
