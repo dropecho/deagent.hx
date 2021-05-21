@@ -353,6 +353,7 @@ class dropecho_ai_fsm_FSM {
 	toDot() {
 		let nodes = "";
 		let edges = "";
+		let transition = this.getTransition();
 		let access = this._transitions;
 		let _g_access = access;
 		let _g_keys = Reflect.fields(access);
@@ -370,16 +371,18 @@ class dropecho_ai_fsm_FSM {
 				let edge = v[_g];
 				++_g;
 				edges += "\n " + key1 + " -> " + edge.to.getName();
-				if(edge == this.getTransition()) {
+				if(transition == edge) {
 					edges += "[class=\"active\"]";
 				}
 			}
 			edges += "\n " + key1 + " -> " + key1;
 			if(key1 == this._currentState.getName()) {
-				nodes += "[class=\"active\"]";
-				if(this.getTransition() == null) {
+				if(transition == null) {
+					nodes += "[class=\"active\"]";
 					edges += "[class=\"active\"]";
 				}
+			} else if(transition != null && transition.to.getName() == key1) {
+				nodes += "[class=\"active\"]";
 			}
 		}
 		return "\n      digraph {\n        " + nodes + "\n        " + edges + "\n      }\n    ";

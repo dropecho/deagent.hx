@@ -88,22 +88,28 @@ class FSM {
 		var nodes = "";
 		var edges = "";
 
+		var transition = getTransition();
+
 		for (key => value in _transitions) {
 			nodes = nodes + "\n" + key;
 
 			var v:Array<Transition> = value;
 			for (edge in v) {
 				edges = edges + '\n $key -> ${edge.to.getName()}';
-				if (edge == getTransition()) {
+				if (transition == edge) {
 					edges += '[class="active"]';
 				}
 			}
 			edges = edges + '\n $key -> $key';
 
 			if (key == _currentState.getName()) {
-				nodes += '[class="active"]';
-				if (getTransition() == null) {
+				if (transition == null) {
+					nodes += '[class="active"]';
 					edges += '[class="active"]';
+				}
+			} else {
+				if (transition != null && transition.to.getName() == key) {
+					nodes += '[class="active"]';
 				}
 			}
 		}

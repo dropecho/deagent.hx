@@ -38,7 +38,6 @@ my_fsm.changeToState(s1);
 setInterval(() => {
   my_fsm.tick();
   var dot = my_fsm.toDot();
-  console.log(dot);
   graphEl.renderDot(dot);
 
   var rows = Object.entries(context.facts)
