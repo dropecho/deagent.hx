@@ -364,9 +364,6 @@ class dropecho_ai_fsm_FSM {
 			let key1 = _g1_key;
 			let value = _g1_value;
 			nodes = nodes + "\n" + key1;
-			if(key1 == this._currentState.getName()) {
-				nodes += "[class=\"active\"]";
-			}
 			let v = value;
 			let _g = 0;
 			while(_g < v.length) {
@@ -374,6 +371,13 @@ class dropecho_ai_fsm_FSM {
 				++_g;
 				edges += "\n " + key1 + " -> " + edge.to.getName();
 				if(edge == this.getTransition()) {
+					edges += "[class=\"active\"]";
+				}
+			}
+			edges += "\n " + key1 + " -> " + key1;
+			if(key1 == this._currentState.getName()) {
+				nodes += "[class=\"active\"]";
+				if(this.getTransition() == null) {
 					edges += "[class=\"active\"]";
 				}
 			}

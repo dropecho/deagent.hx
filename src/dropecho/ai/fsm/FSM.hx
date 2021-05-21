@@ -91,14 +91,18 @@ class FSM {
 		for (key => value in _transitions) {
 			nodes = nodes + "\n" + key;
 
-			if (key == _currentState.getName()) {
-				nodes += '[class="active"]';
-			}
-
 			var v:Array<Transition> = value;
 			for (edge in v) {
 				edges = edges + '\n $key -> ${edge.to.getName()}';
 				if (edge == getTransition()) {
+					edges += '[class="active"]';
+				}
+			}
+			edges = edges + '\n $key -> $key';
+
+			if (key == _currentState.getName()) {
+				nodes += '[class="active"]';
+				if (getTransition() == null) {
 					edges += '[class="active"]';
 				}
 			}

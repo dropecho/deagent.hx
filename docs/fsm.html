@@ -19,15 +19,26 @@
         margin: 0;
       }
       .edge,
-      .edge *,
+      .edge path,
       .node {
         transition: stroke 0.3s;
         stroke: black;
       }
       .edge.active,
-      .edge.active *,
+      .edge.active path,
       .node.active {
         stroke: red;
+      }
+
+      .edge polygon {
+        transition: stroke 0.3s, fill 0.3s;
+        stroke: black;
+        fill: black;
+      }
+
+      .edge.active polygon {
+        stroke: red;
+        fill: red;
       }
     </style>
   </head>
