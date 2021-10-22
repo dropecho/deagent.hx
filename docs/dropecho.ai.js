@@ -351,41 +351,53 @@ class dropecho_ai_fsm_FSM {
 		return null;
 	}
 	toDot() {
-		let nodes = "";
-		let edges = "";
-		let transition = this.getTransition();
+		let nodeOutput = "";
+		let edgeOutput = "";
+		let activeTransition = this.getTransition();
+		let activeTransitionName = activeTransition == null ? "" : activeTransition.to.getName();
+		nodeOutput = "any\n";
+		let _g = 0;
+		let _g1 = this._anyTransitions;
+		while(_g < _g1.length) {
+			let any = _g1[_g];
+			++_g;
+			edgeOutput += "\n any -> " + any.to.getName();
+			if(activeTransitionName == any.to.getName() && this._anyTransitions.includes(activeTransition)) {
+				edgeOutput += "[class=\"active\"]";
+			}
+		}
 		let access = this._transitions;
-		let _g_access = access;
-		let _g_keys = Reflect.fields(access);
-		let _g_index = 0;
-		while(_g_index < _g_keys.length) {
-			let key = _g_keys[_g_index++];
-			let _g1_value = _g_access[key];
-			let _g1_key = key;
-			let key1 = _g1_key;
-			let value = _g1_value;
-			nodes = nodes + "\n" + key1;
+		let _g2_access = access;
+		let _g2_keys = Reflect.fields(access);
+		let _g2_index = 0;
+		while(_g2_index < _g2_keys.length) {
+			let key = _g2_keys[_g2_index++];
+			let _g3_value = _g2_access[key];
+			let _g3_key = key;
+			let key1 = _g3_key;
+			let value = _g3_value;
+			nodeOutput = nodeOutput + "\n" + key1;
 			let v = value;
 			let _g = 0;
 			while(_g < v.length) {
 				let edge = v[_g];
 				++_g;
-				edges += "\n " + key1 + " -> " + edge.to.getName();
-				if(transition == edge) {
-					edges += "[class=\"active\"]";
+				edgeOutput += "\n " + key1 + " -> " + edge.to.getName();
+				if(activeTransition == edge) {
+					edgeOutput += "[class=\"active\"]";
 				}
 			}
-			edges += "\n " + key1 + " -> " + key1;
+			edgeOutput += "\n " + key1 + " -> " + key1;
 			if(key1 == this._currentState.getName()) {
-				if(transition == null) {
-					nodes += "[class=\"active\"]";
-					edges += "[class=\"active\"]";
+				if(activeTransition == null) {
+					nodeOutput += "[class=\"active\"]";
+					edgeOutput += "[class=\"active\"]";
 				}
-			} else if(transition != null && transition.to.getName() == key1) {
-				nodes += "[class=\"active\"]";
+			} else if(activeTransitionName == key1) {
+				nodeOutput += "[class=\"active\"]";
 			}
 		}
-		return "\n      digraph {\n        " + nodes + "\n        " + edges + "\n      }\n    ";
+		return "\n      digraph {\n        rankdir=LR\n\n        " + nodeOutput + "\n        " + edgeOutput + "\n      }\n    ";
 	}
 }
 $hx_exports["fsm"]["FSM"] = dropecho_ai_fsm_FSM;

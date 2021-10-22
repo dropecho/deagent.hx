@@ -3,7 +3,6 @@ package dropecho.ai.fsm;
 import dropecho.interop.AbstractFunc.Func_0;
 import dropecho.interop.AbstractMap;
 
-// typedef Condition = () -> Bool;
 typedef Condition = Func_0<Bool>;
 
 @:nativeGen
@@ -18,7 +17,7 @@ class Transition {
 }
 
 @:expose("fsm.FSM")
-// @:nativeGen
+@:nativeGen
 class FSM {
 	var _currentState:IState;
 	var _transitions = new AbstractMap<String, Array<Transition>>();
@@ -85,39 +84,52 @@ class FSM {
 	}
 
 	public function toDot() {
-		var nodes = "";
-		var edges = "";
+		var nodeOutput = "";
+		var edgeOutput = "";
 
-		var transition = getTransition();
+		var activeTransition = getTransition();
+		var activeTransitionName = activeTransition == null ? "" : activeTransition.to.getName();
+
+		nodeOutput = "any\n";
+
+		for (any in _anyTransitions) {
+			edgeOutput += '\n any -> ${any.to.getName()}';
+			if (activeTransitionName == any.to.getName() && _anyTransitions.contains(activeTransition)) {
+				edgeOutput += '[class="active"]';
+			}
+		}
 
 		for (key => value in _transitions) {
-			nodes = nodes + "\n" + key;
+			nodeOutput = nodeOutput + "\n" + key;
 
 			var v:Array<Transition> = value;
 			for (edge in v) {
-				edges = edges + '\n $key -> ${edge.to.getName()}';
-				if (transition == edge) {
-					edges += '[class="active"]';
+				edgeOutput = edgeOutput + '\n $key -> ${edge.to.getName()}';
+
+				if (activeTransition == edge) {
+					edgeOutput += '[class="active"]';
 				}
 			}
-			edges = edges + '\n $key -> $key';
+			edgeOutput = edgeOutput + '\n $key -> $key';
 
 			if (key == _currentState.getName()) {
-				if (transition == null) {
-					nodes += '[class="active"]';
-					edges += '[class="active"]';
+				if (activeTransition == null) {
+					nodeOutput += '[class="active"]';
+					edgeOutput += '[class="active"]';
 				}
 			} else {
-				if (transition != null && transition.to.getName() == key) {
-					nodes += '[class="active"]';
+				if (activeTransitionName == key) {
+					nodeOutput += '[class="active"]';
 				}
 			}
 		}
 
 		return '
       digraph {
-        ${nodes}
-        ${edges}
+        rankdir=LR
+
+        ${nodeOutput}
+        ${edgeOutput}
       }
     ';
 	}

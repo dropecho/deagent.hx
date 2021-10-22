@@ -33,6 +33,8 @@ my_fsm.addTransition(s2, s3, () => context.get("fact") <= 0);
 my_fsm.addTransition(s3, s2, () => context.get("fact") <= 4);
 my_fsm.addTransition(s3, s1, () => context.get("fact") >= 5);
 
+my_fsm.addAnyTransition(s2, () => context.get("fact") == 1);
+
 my_fsm.changeToState(s1);
 
 setInterval(() => {
