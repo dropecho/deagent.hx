@@ -1,4 +1,4 @@
-package dropecho.ai.fsm;
+package dropecho.ai;
 
 import dropecho.interop.AbstractFunc.Func_0;
 import dropecho.interop.AbstractMap;
@@ -132,5 +132,6 @@ class FSM {
         ${edgeOutput}
       }
     ';
+
 	}
 }

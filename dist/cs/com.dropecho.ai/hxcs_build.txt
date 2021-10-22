@@ -175,6 +175,9 @@ M System.Reflection.Emit.TypeToken
 M System.Runtime.Serialization.IFormatterConverter
 M System.ValueType
 M cs.system.reflection.CallingConventions
+M dropecho.ai.FSM
+C dropecho.ai.Transition
+C dropecho.ai.FSM
 M cs.system.globalization.CultureTypes
 M System.Reflection.Emit.TypeBuilder
 M cs.system.configuration.assemblies.AssemblyHashAlgorithm
@@ -226,8 +229,6 @@ M System.UInt32
 M cs.system.threading.ThreadPriority
 M System.Reflection.Emit.PropertyToken
 M System.Text.RegularExpressions.RegexRunner
-M dropecho.ai.fsm.IState
-C dropecho.ai.fsm.IState
 M Lambda
 C haxe.root.Lambda
 M Any
@@ -299,9 +300,6 @@ M dropecho.util.NotImplementedException
 C dropecho.util.NotImplementedException
 M cs.system.reflection.emit.AssemblyBuilderAccess
 M System.Security.Permissions.StrongNamePublicKeyBlob
-M dropecho.ai.fsm.FSM
-C dropecho.ai.fsm.Transition
-C dropecho.ai.fsm.FSM
 M cs.system.TypeCode
 M Class
 M System.Reflection.ParameterModifier
@@ -412,6 +410,8 @@ M cs.system.reflection.emit.FlowControl
 M System.Runtime.Serialization.SerializationEntry
 M System.String
 M System.Reflection.MethodInfo
+M dropecho.ai.IState
+C dropecho.ai.IState
 M haxe.EnumTools
 M cs.system.threading.ThreadState
 M System.Reflection.PropertyInfo

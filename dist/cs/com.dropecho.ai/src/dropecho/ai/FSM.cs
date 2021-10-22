@@ -1,16 +1,16 @@
 using haxe.root;
 
 #pragma warning disable 109, 114, 219, 429, 168, 162
-namespace dropecho.ai.fsm {
+namespace dropecho.ai {
 	public class Transition {
 		
-		public Transition(global::dropecho.ai.fsm.IState to, global::System.Func<bool> condition) {
+		public Transition(global::dropecho.ai.IState to, global::System.Func<bool> condition) {
 			this.to = to;
 			this.condition = condition;
 		}
 		
 		
-		public global::dropecho.ai.fsm.IState to;
+		public global::dropecho.ai.IState to;
 		
 		public global::System.Func<bool> condition;
 		
@@ -20,7 +20,7 @@ namespace dropecho.ai.fsm {
 
 
 #pragma warning disable 109, 114, 219, 429, 168, 162
-namespace dropecho.ai.fsm {
+namespace dropecho.ai {
 	public class FSM {
 		
 		public FSM() {
@@ -32,14 +32,14 @@ namespace dropecho.ai.fsm {
 		}
 		
 		
-		public global::dropecho.ai.fsm.IState _currentState;
+		public global::dropecho.ai.IState _currentState;
 		
 		public global::System.Collections.Generic.IDictionary<string, global::haxe.root.Array<object>> _transitions;
 		
 		public global::haxe.root.Array<object> _anyTransitions;
 		
 		public virtual void tick() {
-			global::dropecho.ai.fsm.Transition transition = this.getTransition();
+			global::dropecho.ai.Transition transition = this.getTransition();
 			if (( transition != null )) {
 				this.changeToState(transition.to);
 			}
@@ -51,7 +51,7 @@ namespace dropecho.ai.fsm {
 		}
 		
 		
-		public virtual void changeToState(global::dropecho.ai.fsm.IState state) {
+		public virtual void changeToState(global::dropecho.ai.IState state) {
 			if (( state == this._currentState )) {
 				return;
 			}
@@ -65,8 +65,8 @@ namespace dropecho.ai.fsm {
 		}
 		
 		
-		public virtual void addTransition(global::dropecho.ai.fsm.IState @from, global::dropecho.ai.fsm.IState to, global::System.Func<bool> condition) {
-			global::dropecho.ai.fsm.Transition t = new global::dropecho.ai.fsm.Transition(to, condition);
+		public virtual void addTransition(global::dropecho.ai.IState @from, global::dropecho.ai.IState to, global::System.Func<bool> condition) {
+			global::dropecho.ai.Transition t = new global::dropecho.ai.Transition(to, condition);
 			global::System.Collections.Generic.IDictionary<string, global::haxe.root.Array<object>> this1 = this._transitions;
 			string key = @from.getName();
 			if ( ! (this1.ContainsKey(((string) (key) ))) ) {
@@ -83,17 +83,17 @@ namespace dropecho.ai.fsm {
 		}
 		
 		
-		public virtual void addAnyTransition(global::dropecho.ai.fsm.IState to, global::System.Func<bool> condition) {
-			this._anyTransitions.push(new global::dropecho.ai.fsm.Transition(to, condition));
+		public virtual void addAnyTransition(global::dropecho.ai.IState to, global::System.Func<bool> condition) {
+			this._anyTransitions.push(new global::dropecho.ai.Transition(to, condition));
 		}
 		
 		
-		public virtual global::dropecho.ai.fsm.Transition getTransition() {
+		public virtual global::dropecho.ai.Transition getTransition() {
 			{
 				int _g = 0;
 				global::haxe.root.Array<object> _g1 = this._anyTransitions;
 				while (( _g < _g1.length )) {
-					global::dropecho.ai.fsm.Transition t = ((global::dropecho.ai.fsm.Transition) (_g1[_g]) );
+					global::dropecho.ai.Transition t = ((global::dropecho.ai.Transition) (_g1[_g]) );
 					 ++ _g;
 					global::System.Func<bool> this1 = t.condition;
 					if (this1()) {
@@ -114,7 +114,7 @@ namespace dropecho.ai.fsm {
 			if (( _currentTransitions != null )) {
 				int _g2 = 0;
 				while (( _g2 < _currentTransitions.length )) {
-					global::dropecho.ai.fsm.Transition t1 = ((global::dropecho.ai.fsm.Transition) (_currentTransitions[_g2]) );
+					global::dropecho.ai.Transition t1 = ((global::dropecho.ai.Transition) (_currentTransitions[_g2]) );
 					 ++ _g2;
 					global::System.Func<bool> this3 = t1.condition;
 					if (this3()) {
@@ -132,14 +132,14 @@ namespace dropecho.ai.fsm {
 		public virtual string toDot() {
 			string nodeOutput = "";
 			string edgeOutput = "";
-			global::dropecho.ai.fsm.Transition activeTransition = this.getTransition();
+			global::dropecho.ai.Transition activeTransition = this.getTransition();
 			string activeTransitionName = ( (( activeTransition == null )) ? ("") : (activeTransition.to.getName()) );
 			nodeOutput = "any\n";
 			{
 				int _g = 0;
 				global::haxe.root.Array<object> _g1 = this._anyTransitions;
 				while (( _g < _g1.length )) {
-					global::dropecho.ai.fsm.Transition any = ((global::dropecho.ai.fsm.Transition) (_g1[_g]) );
+					global::dropecho.ai.Transition any = ((global::dropecho.ai.Transition) (_g1[_g]) );
 					 ++ _g;
 					edgeOutput = global::haxe.lang.Runtime.concat(edgeOutput, global::haxe.lang.Runtime.concat("\n any -> ", any.to.getName()));
 					if (( ( activeTransitionName == any.to.getName() ) && this._anyTransitions.contains(activeTransition) )) {
@@ -162,7 +162,7 @@ namespace dropecho.ai.fsm {
 						{
 							int _g4 = 0;
 							while (( _g4 < v.length )) {
-								global::dropecho.ai.fsm.Transition edge = ((global::dropecho.ai.fsm.Transition) (v[_g4]) );
+								global::dropecho.ai.Transition edge = ((global::dropecho.ai.Transition) (v[_g4]) );
 								 ++ _g4;
 								edgeOutput = global::haxe.lang.Runtime.concat(edgeOutput, global::haxe.lang.Runtime.concat(global::haxe.lang.Runtime.concat(global::haxe.lang.Runtime.concat("\n ", key), " -> "), edge.to.getName()));
 								if (( activeTransition == edge )) {

@@ -71,6 +71,8 @@
 	
     <Compile Include="src\haxe\exceptions\PosException.cs"/>
 	
+    <Compile Include="src\dropecho\ai\FSM.cs"/>
+	
     <Compile Include="src\haxe\Exception.cs"/>
 	
     <Compile Include="src\Type.cs"/>
@@ -80,8 +82,6 @@
     <Compile Include="src\dropecho\ai\bt\node\decorator\InverterNode.cs"/>
 	
     <Compile Include="src\dropecho\ai\bt\BehaviorTree.cs"/>
-	
-    <Compile Include="src\dropecho\ai\fsm\IState.cs"/>
 	
     <Compile Include="src\Lambda.cs"/>
 	
@@ -99,8 +99,6 @@
 	
     <Compile Include="src\dropecho\util\NotImplementedException.cs"/>
 	
-    <Compile Include="src\dropecho\ai\fsm\FSM.cs"/>
-	
     <Compile Include="src\dropecho\ai\bt\node\TaskNode.cs"/>
 	
     <Compile Include="src\haxe\Constraints.cs"/>
@@ -114,6 +112,8 @@
     <Compile Include="src\haxe\ValueException.cs"/>
 	
     <Compile Include="src\dropecho\ai\goap\Plan.cs"/>
+	
+    <Compile Include="src\dropecho\ai\IState.cs"/>
 	
     <Compile Include="src\cs\internal\StringExt.cs"/>
 	

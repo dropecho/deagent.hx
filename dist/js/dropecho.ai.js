@@ -1,6 +1,6 @@
 (function ($hx_exports, $global) { "use strict";
-$hx_exports["bt"] = $hx_exports["bt"] || {};
 $hx_exports["fsm"] = $hx_exports["fsm"] || {};
+$hx_exports["bt"] = $hx_exports["bt"] || {};
 class Lambda {
 	static iter(it,f) {
 		let x = $getIterator(it);
@@ -61,6 +61,124 @@ class dropecho_ai_Blackboard {
 }
 $hx_exports["Blackboard"] = dropecho_ai_Blackboard;
 dropecho_ai_Blackboard.__name__ = true;
+class dropecho_ai_Transition {
+	constructor(to,condition) {
+		this.to = to;
+		this.condition = condition;
+	}
+}
+dropecho_ai_Transition.__name__ = true;
+class dropecho_ai_FSM {
+	constructor() {
+		this._anyTransitions = [];
+		this._transitions = dropecho_interop_AbstractMap._new();
+	}
+	tick() {
+		let transition = this.getTransition();
+		if(transition != null) {
+			this.changeToState(transition.to);
+		}
+		if(this._currentState != null) {
+			this._currentState.tick();
+		}
+	}
+	changeToState(state) {
+		if(state == this._currentState) {
+			return;
+		}
+		if(this._currentState != null) {
+			this._currentState.onExit();
+		}
+		this._currentState = state;
+		this._currentState.onEnter();
+	}
+	addTransition(from,to,condition) {
+		let t = new dropecho_ai_Transition(to,condition);
+		let transitions = this._transitions[Std.string(from.getName())];
+		if(transitions == null) {
+			transitions = [];
+			this._transitions[Std.string(from.getName())] = transitions;
+		}
+		transitions.push(t);
+	}
+	addAnyTransition(to,condition) {
+		this._anyTransitions.push(new dropecho_ai_Transition(to,condition));
+	}
+	getTransition() {
+		let _g = 0;
+		let _g1 = this._anyTransitions;
+		while(_g < _g1.length) {
+			let t = _g1[_g];
+			++_g;
+			if(t.condition()) {
+				return t;
+			}
+		}
+		let _currentTransitions = this._transitions[Std.string(this._currentState.getName())];
+		if(_currentTransitions != null) {
+			let _g = 0;
+			while(_g < _currentTransitions.length) {
+				let t = _currentTransitions[_g];
+				++_g;
+				if(t.condition()) {
+					return t;
+				}
+			}
+		}
+		return null;
+	}
+	toDot() {
+		let nodeOutput = "";
+		let edgeOutput = "";
+		let activeTransition = this.getTransition();
+		let activeTransitionName = activeTransition == null ? "" : activeTransition.to.getName();
+		nodeOutput = "any\n";
+		let _g = 0;
+		let _g1 = this._anyTransitions;
+		while(_g < _g1.length) {
+			let any = _g1[_g];
+			++_g;
+			edgeOutput += "\n any -> " + any.to.getName();
+			if(activeTransitionName == any.to.getName() && this._anyTransitions.includes(activeTransition)) {
+				edgeOutput += "[class=\"active\"]";
+			}
+		}
+		let access = this._transitions;
+		let _g2_access = access;
+		let _g2_keys = Reflect.fields(access);
+		let _g2_index = 0;
+		while(_g2_index < _g2_keys.length) {
+			let key = _g2_keys[_g2_index++];
+			let _g3_value = _g2_access[key];
+			let _g3_key = key;
+			let key1 = _g3_key;
+			let value = _g3_value;
+			nodeOutput = nodeOutput + "\n" + key1;
+			let v = value;
+			let _g = 0;
+			while(_g < v.length) {
+				let edge = v[_g];
+				++_g;
+				edgeOutput += "\n " + key1 + " -> " + edge.to.getName();
+				if(activeTransition == edge) {
+					edgeOutput += "[class=\"active\"]";
+				}
+			}
+			edgeOutput += "\n " + key1 + " -> " + key1;
+			if(key1 == this._currentState.getName()) {
+				if(activeTransition == null) {
+					nodeOutput += "[class=\"active\"]";
+					edgeOutput += "[class=\"active\"]";
+				}
+			} else if(activeTransitionName == key1) {
+				nodeOutput += "[class=\"active\"]";
+			}
+		}
+		return "\n      digraph {\n        rankdir=LR\n\n        " + nodeOutput + "\n        " + edgeOutput + "\n      }\n    ";
+	}
+}
+$hx_exports["fsm"]["FSM"] = dropecho_ai_FSM;
+dropecho_ai_FSM.__name__ = true;
 class dropecho_interop_AbstractMap {
 	static _new(s) {
 		let this1;
@@ -283,124 +401,6 @@ class dropecho_ai_bt_node_decorator_SucceederNode extends dropecho_ai_bt_node_de
 }
 $hx_exports["bt"]["SucceederNode"] = dropecho_ai_bt_node_decorator_SucceederNode;
 dropecho_ai_bt_node_decorator_SucceederNode.__name__ = true;
-class dropecho_ai_fsm_Transition {
-	constructor(to,condition) {
-		this.to = to;
-		this.condition = condition;
-	}
-}
-dropecho_ai_fsm_Transition.__name__ = true;
-class dropecho_ai_fsm_FSM {
-	constructor() {
-		this._anyTransitions = [];
-		this._transitions = dropecho_interop_AbstractMap._new();
-	}
-	tick() {
-		let transition = this.getTransition();
-		if(transition != null) {
-			this.changeToState(transition.to);
-		}
-		if(this._currentState != null) {
-			this._currentState.tick();
-		}
-	}
-	changeToState(state) {
-		if(state == this._currentState) {
-			return;
-		}
-		if(this._currentState != null) {
-			this._currentState.onExit();
-		}
-		this._currentState = state;
-		this._currentState.onEnter();
-	}
-	addTransition(from,to,condition) {
-		let t = new dropecho_ai_fsm_Transition(to,condition);
-		let transitions = this._transitions[Std.string(from.getName())];
-		if(transitions == null) {
-			transitions = [];
-			this._transitions[Std.string(from.getName())] = transitions;
-		}
-		transitions.push(t);
-	}
-	addAnyTransition(to,condition) {
-		this._anyTransitions.push(new dropecho_ai_fsm_Transition(to,condition));
-	}
-	getTransition() {
-		let _g = 0;
-		let _g1 = this._anyTransitions;
-		while(_g < _g1.length) {
-			let t = _g1[_g];
-			++_g;
-			if(t.condition()) {
-				return t;
-			}
-		}
-		let _currentTransitions = this._transitions[Std.string(this._currentState.getName())];
-		if(_currentTransitions != null) {
-			let _g = 0;
-			while(_g < _currentTransitions.length) {
-				let t = _currentTransitions[_g];
-				++_g;
-				if(t.condition()) {
-					return t;
-				}
-			}
-		}
-		return null;
-	}
-	toDot() {
-		let nodeOutput = "";
-		let edgeOutput = "";
-		let activeTransition = this.getTransition();
-		let activeTransitionName = activeTransition == null ? "" : activeTransition.to.getName();
-		nodeOutput = "any\n";
-		let _g = 0;
-		let _g1 = this._anyTransitions;
-		while(_g < _g1.length) {
-			let any = _g1[_g];
-			++_g;
-			edgeOutput += "\n any -> " + any.to.getName();
-			if(activeTransitionName == any.to.getName() && this._anyTransitions.includes(activeTransition)) {
-				edgeOutput += "[class=\"active\"]";
-			}
-		}
-		let access = this._transitions;
-		let _g2_access = access;
-		let _g2_keys = Reflect.fields(access);
-		let _g2_index = 0;
-		while(_g2_index < _g2_keys.length) {
-			let key = _g2_keys[_g2_index++];
-			let _g3_value = _g2_access[key];
-			let _g3_key = key;
-			let key1 = _g3_key;
-			let value = _g3_value;
-			nodeOutput = nodeOutput + "\n" + key1;
-			let v = value;
-			let _g = 0;
-			while(_g < v.length) {
-				let edge = v[_g];
-				++_g;
-				edgeOutput += "\n " + key1 + " -> " + edge.to.getName();
-				if(activeTransition == edge) {
-					edgeOutput += "[class=\"active\"]";
-				}
-			}
-			edgeOutput += "\n " + key1 + " -> " + key1;
-			if(key1 == this._currentState.getName()) {
-				if(activeTransition == null) {
-					nodeOutput += "[class=\"active\"]";
-					edgeOutput += "[class=\"active\"]";
-				}
-			} else if(activeTransitionName == key1) {
-				nodeOutput += "[class=\"active\"]";
-			}
-		}
-		return "\n      digraph {\n        rankdir=LR\n\n        " + nodeOutput + "\n        " + edgeOutput + "\n      }\n    ";
-	}
-}
-$hx_exports["fsm"]["FSM"] = dropecho_ai_fsm_FSM;
-dropecho_ai_fsm_FSM.__name__ = true;
 class dropecho_ai_goap_Action {
 	constructor(actionType,updateFunc,cost,preconditions,postconditions,preMatcher,postMatcher) {
 		if(cost == null) {
