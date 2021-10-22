@@ -1,6 +1,7 @@
 *.swp
 .temp
 *.dll
+**/*.dll
 node_modules
 
 artifacts
