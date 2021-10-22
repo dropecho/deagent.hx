@@ -1,0 +1,9 @@
+{
+  "name": "com.dropecho.ai",
+  "displayName": "AI",
+  "version": "0.1.8",
+  "description": "An example haxelib that outputs to multiple targets.",
+  "author": "Dropecho <vantreeseba@gmail.com>",
+  "repository": "github:dropecho/lib_example",
+  "license": "MIT"
+}
