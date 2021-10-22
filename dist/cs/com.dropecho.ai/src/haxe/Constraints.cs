@@ -7,9 +7,10 @@ namespace haxe {
 	}
 	public class IMap__Statics_{
 		public static object __hx_cast<K_c_c, V_c_c>(global::haxe.IMap me) {
+			#line 67 "/usr/share/haxe/std/haxe/Constraints.hx"
 			return ( (( me != null )) ? (me.haxe_IMap_cast<K_c_c, V_c_c>()) : default(object) );
 		}
-		
+		#line default
 		
 	}
 }

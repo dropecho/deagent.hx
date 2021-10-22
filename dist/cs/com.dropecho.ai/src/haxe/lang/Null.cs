@@ -34,14 +34,17 @@ namespace haxe.lang {
 			else return value.ToString();
 		}
 		public Null(T v, bool hasValue) {
+			#line 63 "/usr/share/haxe/std/cs/internal/Null.hx"
 			if (( hasValue && global::System.Object.ReferenceEquals(((object) (v) ), default(object)) )) {
+				#line 64 "/usr/share/haxe/std/cs/internal/Null.hx"
 				hasValue = false;
 			}
 			
+			#line 66 "/usr/share/haxe/std/cs/internal/Null.hx"
 			this.@value = v;
 			this.hasValue = hasValue;
 		}
-		
+		#line default
 		
 		public static global::haxe.lang.Null<D> ofDynamic<D>(object obj) {
 			if (obj == null) {
@@ -61,13 +64,16 @@ namespace haxe.lang {
 		public readonly bool hasValue;
 		
 		public object toDynamic() {
+			#line 84 "/usr/share/haxe/std/cs/internal/Null.hx"
 			if (this.hasValue) {
+				#line 85 "/usr/share/haxe/std/cs/internal/Null.hx"
 				return this.@value;
 			}
 			
+			#line 86 "/usr/share/haxe/std/cs/internal/Null.hx"
 			return null;
 		}
-		
+		#line default
 		
 	}
 }

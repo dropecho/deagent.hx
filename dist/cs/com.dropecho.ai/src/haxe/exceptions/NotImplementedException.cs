@@ -9,12 +9,14 @@ namespace haxe.exceptions {
 		
 		
 		public NotImplementedException(string message, global::haxe.Exception previous, object pos) : base(((string) (( (( message == null )) ? ("Not implemented") : (message) )) ), ((global::haxe.Exception) (( (( previous == null )) ? (null) : (previous) )) ), ((object) (( (( pos == null )) ? (null) : (pos) )) )) {
+			#line 8 "/usr/share/haxe/std/haxe/exceptions/NotImplementedException.hx"
 			if (( message == null )) {
+				#line 8 "/usr/share/haxe/std/haxe/exceptions/NotImplementedException.hx"
 				message = "Not implemented";
 			}
 			
 		}
-		
+		#line default
 		
 	}
 }

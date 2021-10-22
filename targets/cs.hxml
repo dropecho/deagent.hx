@@ -1,3 +1,5 @@
 -D no-root
+-D no-compilation
+-D no-root
 
 -cs dist/cs/com.dropecho.ai

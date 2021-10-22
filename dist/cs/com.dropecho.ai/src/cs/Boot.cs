@@ -9,18 +9,20 @@ namespace cs {
 		
 		
 		public Boot() {
+			#line 41 "/usr/share/haxe/std/cs/Boot.hx"
 			global::cs.Boot.__hx_ctor_cs_Boot(this);
 		}
-		
+		#line default
 		
 		protected static void __hx_ctor_cs_Boot(global::cs.Boot __hx_this) {
 		}
 		
 		
 		public static void init() {
+			#line 47 "/usr/share/haxe/std/cs/Boot.hx"
 			global::cs.Lib.applyCultureChanges();
 		}
-		
+		#line default
 		
 	}
 }

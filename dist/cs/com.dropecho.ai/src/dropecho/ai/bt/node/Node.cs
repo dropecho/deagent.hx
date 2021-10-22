@@ -9,9 +9,10 @@ namespace dropecho.ai.bt.node {
 	}
 	public class IExecutable__Statics_{
 		public static object __hx_cast<T_c_c>(global::dropecho.ai.bt.node.IExecutable me) {
+			#line 6 "/home/vantreeseba/code/dropecho/ai/src/dropecho/ai/bt/node/Node.hx"
 			return ( (( me != null )) ? (me.dropecho_ai_bt_node_IExecutable_cast<T_c_c>()) : default(object) );
 		}
-		
+		#line default
 		
 	}
 }
