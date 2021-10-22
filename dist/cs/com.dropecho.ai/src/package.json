@@ -1,0 +1,19 @@
+{
+  "name": "@dropecho/lib_example",
+  "version": "0.1.8",
+  "description": "An example haxelib that outputs to multiple targets.",
+  "author": "vantreeseba <vantreeseba@gmail.com>",
+  "repository": "github:dropecho/lib_example",
+  "main": "dist/js/index.js",
+  "files": [
+    "dist/js/index.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "haxelib run munit t",
+    "build": "haxe build.hxml"
+  }
+}
